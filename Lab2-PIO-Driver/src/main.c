@@ -122,11 +122,27 @@ void _pio_set_input(Pio *p_pio, const uint32_t ul_mask,const uint32_t ul_attribu
 	}
 }
 
-void _pio_set_output(Pio *p_pio, const uint32_t ul_mask,
-const uint32_t ul_default_level,
-const uint32_t ul_multidrive_enable,
-const uint32_t ul_pull_up_enable){
+void _pio_set_output(Pio *p_pio, const uint32_t ul_mask,const uint32_t ul_default_level,const uint32_t ul_multidrive_enable,const uint32_t ul_pull_up_enable){
+	p_pio -> PIO_OER = ul_mask;
+	p_pio -> PIO_PER = ul_mask;
 	
+	_pio_pull_up(p_pio,ul_mask,ul_pull_up_enable);
+	
+	if (ul_multidrive_enable) {
+		p_pio -> PIO_MDER = ul_mask;
+	}
+	else{
+		p_pio -> PIO_MDDR = ul_mask;
+	}
+
+	if (ul_default_level) {
+		p_pio->PIO_SODR = ul_mask;
+	}
+	else{
+		p_pio->PIO_CODR = ul_mask;
+	}
+
+
 }
 
 // Função de inicialização do uC
@@ -169,10 +185,10 @@ void init(void){
 
 
 	//Inicializa PC8 como saída
-	pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 0, 0, 0);
-	pio_set_output(LED1_PIO, LED1_PIO_IDX_MASK, 0, 0, 0);
-	pio_set_output(LED2_PIO, LED2_PIO_IDX_MASK, 0, 0, 0);
-	pio_set_output(LED3_PIO, LED3_PIO_IDX_MASK, 0, 0, 0);
+	_pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 0, 0, 0);
+	_pio_set_output(LED1_PIO, LED1_PIO_IDX_MASK, 0, 0, 0);
+	_pio_set_output(LED2_PIO, LED2_PIO_IDX_MASK, 0, 0, 0);
+	_pio_set_output(LED3_PIO, LED3_PIO_IDX_MASK, 0, 0, 0);
 
 }
 
