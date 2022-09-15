@@ -130,7 +130,7 @@ static void task_led(void *pvParameters) {
 	/* tarefas de um RTOS não devem retornar */
 	for (;;) {
 		/* verifica se chegou algum dado na queue, e espera por 0 ticks */
-		if (xQueueReceive(xQueueLedFreq, &msg, (TickType_t) 0)) {
+		if (xQueueReceive(xQueueAumentaLed, &msg, (TickType_t) 0)) {
 			/* chegou novo valor, atualiza delay ! */
 			/* aqui eu poderia verificar se msg faz sentido (se esta no range certo)
 			*/
@@ -162,7 +162,7 @@ static void task_but(void *pvParameters) {
 			delayTicks -= 100;
 
 			/* envia nova frequencia para a task_led */
-			xQueueSend(xQueueLedFreq, (void *)&delayTicks, 10);
+			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
 			
 			printf("task_but: %d \n", delayTicks);
 
@@ -176,11 +176,6 @@ static void task_but(void *pvParameters) {
 			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
 			
 			printf("task_but: %d \n", delayTicks);
-
-			/* garante range da freq. */
-			if (delayTicks == 100) {
-				delayTicks = 900;
-			}
 		}
 	}
 }
@@ -286,6 +281,7 @@ int main(void) {
 
 	/* Attempt to create a semaphore. */
 	xSemaphoreBut = xSemaphoreCreateBinary();
+	xSemaphoreBut2 = xSemaphoreCreateBinary();
 	if (xSemaphoreBut == NULL){
 		printf("falha em criar o primeiro semaforo \n");
 	}

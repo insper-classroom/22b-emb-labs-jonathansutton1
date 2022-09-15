@@ -8821,31 +8821,31 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x004029b8       0x24 src/main.o
                 0x004029b8                but2_callback
  .text.task_but
-                0x004029dc      0x160 src/main.o
+                0x004029dc      0x150 src/main.o
  .text.usart_serial_getchar
-                0x00402b3c       0xdc src/main.o
+                0x00402b2c       0xdc src/main.o
  .text.usart_serial_putchar
-                0x00402c18       0xd0 src/main.o
+                0x00402c08       0xd0 src/main.o
  .text.vApplicationStackOverflowHook
-                0x00402ce8       0x18 src/main.o
-                0x00402ce8                vApplicationStackOverflowHook
+                0x00402cd8       0x18 src/main.o
+                0x00402cd8                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x00402d00        0x4 src/main.o
-                0x00402d00                vApplicationTickHook
+                0x00402cf0        0x4 src/main.o
+                0x00402cf0                vApplicationTickHook
  .text.vApplicationMallocFailedHook
-                0x00402d04       0x18 src/main.o
-                0x00402d04                vApplicationMallocFailedHook
+                0x00402cf4       0x18 src/main.o
+                0x00402cf4                vApplicationMallocFailedHook
  .text.pin_toggle
-                0x00402d1c       0x30 src/main.o
-                0x00402d1c                pin_toggle
+                0x00402d0c       0x30 src/main.o
+                0x00402d0c                pin_toggle
  .text.LED_init
-                0x00402d4c       0x2c src/main.o
-                0x00402d4c                LED_init
+                0x00402d3c       0x2c src/main.o
+                0x00402d3c                LED_init
  .text.task_led
-                0x00402d78       0x78 src/main.o
+                0x00402d68       0x78 src/main.o
  .text.startup.main
-                0x00402df0      0x1a0 src/main.o
-                0x00402df0                main
+                0x00402de0      0x1b0 src/main.o
+                0x00402de0                main
  .text.__libc_init_array
                 0x00402f90       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-init.o)
                 0x00402f90                __libc_init_array
@@ -9465,7 +9465,7 @@ OUTPUT(FREERTOS_SAM_EXAMPLE1.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/ASF/thirdparty/freertos/freertos-8.2.3/Source/timers.o
  .comment       0x00000059       0x5a src/main.o
 
-.debug_info     0x00000000    0x1dd84
+.debug_info     0x00000000    0x1dda2
  .debug_info    0x00000000     0x1292 src/ASF/common/services/clock/same70/sysclk.o
  .debug_info    0x00001292      0xb02 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_info    0x00001d94      0xac9 src/ASF/common/utils/stdio/read.o
@@ -9485,7 +9485,7 @@ OUTPUT(FREERTOS_SAM_EXAMPLE1.elf elf32-littlearm)
  .debug_info    0x00013862     0x2831 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/queue.o
  .debug_info    0x00016093     0x38b5 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/tasks.o
  .debug_info    0x00019948     0x1c50 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/timers.o
- .debug_info    0x0001b598     0x27ec src/main.o
+ .debug_info    0x0001b598     0x280a src/main.o
 
 .debug_abbrev   0x00000000     0x3fcd
  .debug_abbrev  0x00000000      0x346 src/ASF/common/services/clock/same70/sysclk.o
@@ -9791,7 +9791,7 @@ OUTPUT(FREERTOS_SAM_EXAMPLE1.elf elf32-littlearm)
  .debug_macro   0x000211c2       0x16 src/main.o
  .debug_macro   0x000211d8       0x1c src/main.o
 
-.debug_line     0x00000000    0x105cc
+.debug_line     0x00000000    0x105d1
  .debug_line    0x00000000      0xb67 src/ASF/common/services/clock/same70/sysclk.o
  .debug_line    0x00000b67      0xa08 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_line    0x0000156f      0x9e9 src/ASF/common/utils/stdio/read.o
@@ -9811,7 +9811,7 @@ OUTPUT(FREERTOS_SAM_EXAMPLE1.elf elf32-littlearm)
  .debug_line    0x0000bb0e     0x12b4 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/queue.o
  .debug_line    0x0000cdc2     0x17f5 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/tasks.o
  .debug_line    0x0000e5b7      0xdf5 src/ASF/thirdparty/freertos/freertos-8.2.3/Source/timers.o
- .debug_line    0x0000f3ac     0x1220 src/main.o
+ .debug_line    0x0000f3ac     0x1225 src/main.o
 
 .debug_str      0x00000000    0x93735
  .debug_str     0x00000000    0x85ef2 src/ASF/common/services/clock/same70/sysclk.o

@@ -19,23 +19,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   7 .comment      00000059  00000000  00000000  000209e6  2**0
                   CONTENTS, READONLY
-  8 .debug_info   0001dd84  00000000  00000000  00020a3f  2**0
+  8 .debug_info   0001dda2  00000000  00000000  00020a3f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_abbrev 00003fcd  00000000  00000000  0003e7c3  2**0
+  9 .debug_abbrev 00003fcd  00000000  00000000  0003e7e1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000a5f9  00000000  00000000  00042790  2**0
+ 10 .debug_loc    0000a5f9  00000000  00000000  000427ae  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000de8  00000000  00000000  0004cd89  2**0
+ 11 .debug_aranges 00000de8  00000000  00000000  0004cda7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00001e40  00000000  00000000  0004db71  2**0
+ 12 .debug_ranges 00001e40  00000000  00000000  0004db8f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  000211f4  00000000  00000000  0004f9b1  2**0
+ 13 .debug_macro  000211f4  00000000  00000000  0004f9cf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   000105cc  00000000  00000000  00070ba5  2**0
+ 14 .debug_line   000105d1  00000000  00000000  00070bc3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    00093735  00000000  00000000  00081171  2**0
+ 15 .debug_str    00093735  00000000  00000000  00081194  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  000031d8  00000000  00000000  001148a8  2**2
+ 16 .debug_frame  000031d8  00000000  00000000  001148cc  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1931,7 +1931,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
   400a6c:	20400000 	.word	0x20400000
   400a70:	e000ed88 	.word	0xe000ed88
   400a74:	00402f91 	.word	0x00402f91
-  400a78:	00402df1 	.word	0x00402df1
+  400a78:	00402de1 	.word	0x00402de1
 
 00400a7c <SystemCoreClockUpdate>:
 }
@@ -2967,7 +2967,7 @@ void *pvReturn;
   401010:	00401ca5 	.word	0x00401ca5
   401014:	00403009 	.word	0x00403009
   401018:	00401e35 	.word	0x00401e35
-  40101c:	00402d05 	.word	0x00402d05
+  40101c:	00402cf5 	.word	0x00402cf5
 
 00401020 <vPortFree>:
 /*-----------------------------------------------------------*/
@@ -4984,7 +4984,7 @@ BaseType_t xSwitchRequired = pdFALSE;
   401e0c:	20400adc 	.word	0x20400adc
   401e10:	00400c6d 	.word	0x00400c6d
   401e14:	20400acc 	.word	0x20400acc
-  401e18:	00402d01 	.word	0x00402d01
+  401e18:	00402cf1 	.word	0x00402cf1
   401e1c:	20400b54 	.word	0x20400b54
   401e20:	20400a60 	.word	0x20400a60
   401e24:	20400b0c 	.word	0x20400b0c
@@ -5370,7 +5370,7 @@ BaseType_t xAlreadyYielded = pdFALSE;
   402128:	20400ad0 	.word	0x20400ad0
   40212c:	20400b54 	.word	0x20400b54
   402130:	20400a58 	.word	0x20400a58
-  402134:	00402ce9 	.word	0x00402ce9
+  402134:	00402cd9 	.word	0x00402cd9
   402138:	20400adc 	.word	0x20400adc
   40213c:	20400a64 	.word	0x20400a64
 
@@ -6730,30 +6730,30 @@ static void BUT_init(void) {
 	// Configura PIO para lidar com o pino do botão como entrada
 	// com pull-up
 	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP);
-  4029e0:	f8df 9140 	ldr.w	r9, [pc, #320]	; 402b24 <task_but+0x148>
+  4029e0:	f8df 8130 	ldr.w	r8, [pc, #304]	; 402b14 <task_but+0x138>
 static void task_but(void *pvParameters) {
   4029e4:	b085      	sub	sp, #20
 	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP);
   4029e6:	2301      	movs	r3, #1
   4029e8:	f44f 6200 	mov.w	r2, #2048	; 0x800
   4029ec:	f04f 5120 	mov.w	r1, #671088640	; 0x28000000
-  4029f0:	4841      	ldr	r0, [pc, #260]	; (402af8 <task_but+0x11c>)
-  4029f2:	47c8      	blx	r9
+  4029f0:	483e      	ldr	r0, [pc, #248]	; (402aec <task_but+0x110>)
+  4029f2:	47c0      	blx	r8
 
 	// Configura interrupção no pino referente ao botao e associa
 	// função de callback caso uma interrupção for gerada
 	// a função de callback é a: but_callback()
 	pio_handler_set(BUT_PIO,
-  4029f4:	4941      	ldr	r1, [pc, #260]	; (402afc <task_but+0x120>)
+  4029f4:	493e      	ldr	r1, [pc, #248]	; (402af0 <task_but+0x114>)
   4029f6:	2350      	movs	r3, #80	; 0x50
   4029f8:	f44f 6200 	mov.w	r2, #2048	; 0x800
-  4029fc:	4e40      	ldr	r6, [pc, #256]	; (402b00 <task_but+0x124>)
+  4029fc:	4e3d      	ldr	r6, [pc, #244]	; (402af4 <task_but+0x118>)
 	uint32_t delayTicks = 2000;
   4029fe:	af04      	add	r7, sp, #16
 	pio_handler_set(BUT_PIO,
   402a00:	9100      	str	r1, [sp, #0]
   402a02:	210a      	movs	r1, #10
-  402a04:	483c      	ldr	r0, [pc, #240]	; (402af8 <task_but+0x11c>)
+  402a04:	4839      	ldr	r0, [pc, #228]	; (402aec <task_but+0x110>)
   402a06:	47b0      	blx	r6
 	BUT_PIO_PIN_MASK,
 	PIO_IT_FALL_EDGE,
@@ -6761,21 +6761,21 @@ static void task_but(void *pvParameters) {
 
 	// Ativa interrupção e limpa primeira IRQ gerada na ativacao
 	pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
-  402a08:	4d3e      	ldr	r5, [pc, #248]	; (402b04 <task_but+0x128>)
+  402a08:	4d3b      	ldr	r5, [pc, #236]	; (402af8 <task_but+0x11c>)
   402a0a:	f44f 6100 	mov.w	r1, #2048	; 0x800
-  402a0e:	483a      	ldr	r0, [pc, #232]	; (402af8 <task_but+0x11c>)
+  402a0e:	4837      	ldr	r0, [pc, #220]	; (402aec <task_but+0x110>)
   402a10:	47a8      	blx	r5
 	pio_get_interrupt_status(BUT_PIO);
-  402a12:	4c3d      	ldr	r4, [pc, #244]	; (402b08 <task_but+0x12c>)
-  402a14:	4838      	ldr	r0, [pc, #224]	; (402af8 <task_but+0x11c>)
-  402a16:	47a0      	blx	r4
+  402a12:	f8df 9104 	ldr.w	r9, [pc, #260]	; 402b18 <task_but+0x13c>
+  402a16:	4835      	ldr	r0, [pc, #212]	; (402aec <task_but+0x110>)
+  402a18:	47c8      	blx	r9
     \param [in]      IRQn  External interrupt number. Value cannot be negative.
  */
 __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
 {
 /*  NVIC->ISER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));  enable interrupt */
   NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F)); /* enable interrupt */
-  402a18:	f8df 810c 	ldr.w	r8, [pc, #268]	; 402b28 <task_but+0x14c>
+  402a1a:	4c38      	ldr	r4, [pc, #224]	; (402afc <task_but+0x120>)
 __STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
 {
   if(IRQn < 0) {
@@ -6793,52 +6793,54 @@ static void BUT2_init(void) {
 	pio_configure(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK, PIO_PULLUP);
   402a24:	2301      	movs	r3, #1
   402a26:	f04f 4200 	mov.w	r2, #2147483648	; 0x80000000
-  402a2a:	f8c8 0000 	str.w	r0, [r8]
-  402a2e:	f04f 5120 	mov.w	r1, #671088640	; 0x28000000
+  402a2a:	6020      	str	r0, [r4, #0]
+  402a2c:	f04f 5120 	mov.w	r1, #671088640	; 0x28000000
     NVIC->IP[(uint32_t)(IRQn)]            = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for device specific Interrupts  */
-  402a32:	f888 e30a 	strb.w	lr, [r8, #778]	; 0x30a
-  402a36:	4835      	ldr	r0, [pc, #212]	; (402b0c <task_but+0x130>)
-  402a38:	47c8      	blx	r9
+  402a30:	f884 e30a 	strb.w	lr, [r4, #778]	; 0x30a
+  402a34:	4832      	ldr	r0, [pc, #200]	; (402b00 <task_but+0x124>)
+  402a36:	47c0      	blx	r8
 
 	// Configura interrupção no pino referente ao botao e associa
 	// função de callback caso uma interrupção for gerada
 	// a função de callback é a: but_callback()
 	pio_handler_set(BUT2_PIO,
-  402a3a:	4935      	ldr	r1, [pc, #212]	; (402b10 <task_but+0x134>)
-  402a3c:	2350      	movs	r3, #80	; 0x50
-  402a3e:	f04f 4200 	mov.w	r2, #2147483648	; 0x80000000
-  402a42:	9100      	str	r1, [sp, #0]
-  402a44:	210c      	movs	r1, #12
-  402a46:	4831      	ldr	r0, [pc, #196]	; (402b0c <task_but+0x130>)
-  402a48:	47b0      	blx	r6
+  402a38:	4932      	ldr	r1, [pc, #200]	; (402b04 <task_but+0x128>)
+  402a3a:	2350      	movs	r3, #80	; 0x50
+  402a3c:	f04f 4200 	mov.w	r2, #2147483648	; 0x80000000
+  402a40:	9100      	str	r1, [sp, #0]
+  402a42:	210c      	movs	r1, #12
+  402a44:	482e      	ldr	r0, [pc, #184]	; (402b00 <task_but+0x124>)
+  402a46:	47b0      	blx	r6
 	BUT2_PIO_IDX_MASK,
 	PIO_IT_FALL_EDGE,
 	but2_callback);
 
 	// Ativa interrupção e limpa primeira IRQ gerada na ativacao
 	pio_enable_interrupt(BUT2_PIO, BUT2_PIO_IDX_MASK);
-  402a4a:	f04f 4100 	mov.w	r1, #2147483648	; 0x80000000
-  402a4e:	482f      	ldr	r0, [pc, #188]	; (402b0c <task_but+0x130>)
-  402a50:	47a8      	blx	r5
+  402a48:	f04f 4100 	mov.w	r1, #2147483648	; 0x80000000
+  402a4c:	482c      	ldr	r0, [pc, #176]	; (402b00 <task_but+0x124>)
+  402a4e:	47a8      	blx	r5
 	pio_get_interrupt_status(BUT2_PIO);
-  402a52:	482e      	ldr	r0, [pc, #184]	; (402b0c <task_but+0x130>)
-  402a54:	47a0      	blx	r4
+  402a50:	482b      	ldr	r0, [pc, #172]	; (402b00 <task_but+0x124>)
+  402a52:	47c8      	blx	r9
   NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F)); /* enable interrupt */
+  402a54:	4929      	ldr	r1, [pc, #164]	; (402afc <task_but+0x120>)
   402a56:	f44f 5280 	mov.w	r2, #4096	; 0x1000
 	uint32_t delayTicks = 2000;
   402a5a:	f44f 63fa 	mov.w	r3, #2000	; 0x7d0
-  402a5e:	4e2d      	ldr	r6, [pc, #180]	; (402b14 <task_but+0x138>)
-  402a60:	f8c8 2000 	str.w	r2, [r8]
+  402a5e:	4e2a      	ldr	r6, [pc, #168]	; (402b08 <task_but+0x12c>)
+  402a60:	600a      	str	r2, [r1, #0]
     NVIC->IP[(uint32_t)(IRQn)]            = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for device specific Interrupts  */
-  402a64:	f06f 027f 	mvn.w	r2, #127	; 0x7f
-  402a68:	4c2b      	ldr	r4, [pc, #172]	; (402b18 <task_but+0x13c>)
-  402a6a:	f888 230c 	strb.w	r2, [r8, #780]	; 0x30c
-  402a6e:	f8df b0bc 	ldr.w	fp, [pc, #188]	; 402b2c <task_but+0x150>
-  402a72:	f8df a0bc 	ldr.w	sl, [pc, #188]	; 402b30 <task_but+0x154>
-  402a76:	f8df 90bc 	ldr.w	r9, [pc, #188]	; 402b34 <task_but+0x158>
-  402a7a:	4d28      	ldr	r5, [pc, #160]	; (402b1c <task_but+0x140>)
+  402a62:	460a      	mov	r2, r1
+  402a64:	f06f 017f 	mvn.w	r1, #127	; 0x7f
+  402a68:	4c28      	ldr	r4, [pc, #160]	; (402b0c <task_but+0x130>)
+  402a6a:	f8df b0b0 	ldr.w	fp, [pc, #176]	; 402b1c <task_but+0x140>
+  402a6e:	f882 130c 	strb.w	r1, [r2, #780]	; 0x30c
+  402a72:	f8df a0ac 	ldr.w	sl, [pc, #172]	; 402b20 <task_but+0x144>
+  402a76:	f8df 90ac 	ldr.w	r9, [pc, #172]	; 402b24 <task_but+0x148>
+  402a7a:	4d25      	ldr	r5, [pc, #148]	; (402b10 <task_but+0x134>)
 			printf("task_but: %d \n", delayTicks);
-  402a7c:	f8df 80b8 	ldr.w	r8, [pc, #184]	; 402b38 <task_but+0x15c>
+  402a7c:	f8df 80a8 	ldr.w	r8, [pc, #168]	; 402b28 <task_but+0x14c>
 	uint32_t delayTicks = 2000;
   402a80:	f847 3d04 	str.w	r3, [r7, #-4]!
   402a84:	e006      	b.n	402a94 <task_but+0xb8>
@@ -6859,17 +6861,17 @@ static void BUT2_init(void) {
   402aa2:	d0f0      	beq.n	402a86 <task_but+0xaa>
 			delayTicks -= 100;
   402aa4:	9803      	ldr	r0, [sp, #12]
-			xQueueSend(xQueueLedFreq, (void *)&delayTicks, 10);
+			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
   402aa6:	2300      	movs	r3, #0
   402aa8:	220a      	movs	r2, #10
   402aaa:	4639      	mov	r1, r7
 			delayTicks -= 100;
   402aac:	f1a0 0e64 	sub.w	lr, r0, #100	; 0x64
-			xQueueSend(xQueueLedFreq, (void *)&delayTicks, 10);
+			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
   402ab0:	f8db 0000 	ldr.w	r0, [fp]
 			delayTicks -= 100;
   402ab4:	f8cd e00c 	str.w	lr, [sp, #12]
-			xQueueSend(xQueueLedFreq, (void *)&delayTicks, 10);
+			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
   402ab8:	47d0      	blx	sl
 			printf("task_but: %d \n", delayTicks);
   402aba:	9903      	ldr	r1, [sp, #12]
@@ -6886,14 +6888,13 @@ static void BUT2_init(void) {
 			delayTicks += 100;
   402ace:	9803      	ldr	r0, [sp, #12]
 			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
-  402ad0:	2300      	movs	r3, #0
-  402ad2:	220a      	movs	r2, #10
-  402ad4:	4639      	mov	r1, r7
+  402ad0:	4639      	mov	r1, r7
+  402ad2:	2300      	movs	r3, #0
+  402ad4:	220a      	movs	r2, #10
 			delayTicks += 100;
   402ad6:	f100 0e64 	add.w	lr, r0, #100	; 0x64
 			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
-  402ada:	4811      	ldr	r0, [pc, #68]	; (402b20 <task_but+0x144>)
-  402adc:	6800      	ldr	r0, [r0, #0]
+  402ada:	f8db 0000 	ldr.w	r0, [fp]
 			delayTicks += 100;
   402ade:	f8cd e00c 	str.w	lr, [sp, #12]
 			xQueueSend(xQueueAumentaLed, (void *)&delayTicks, 10);
@@ -6902,606 +6903,611 @@ static void BUT2_init(void) {
   402ae4:	9903      	ldr	r1, [sp, #12]
   402ae6:	4640      	mov	r0, r8
   402ae8:	47c8      	blx	r9
-			if (delayTicks == 100) {
-  402aea:	9b03      	ldr	r3, [sp, #12]
-  402aec:	2b64      	cmp	r3, #100	; 0x64
-  402aee:	d1d1      	bne.n	402a94 <task_but+0xb8>
-				delayTicks = 900;
-  402af0:	f44f 7361 	mov.w	r3, #900	; 0x384
-  402af4:	9303      	str	r3, [sp, #12]
-  402af6:	e7cd      	b.n	402a94 <task_but+0xb8>
-  402af8:	400e0e00 	.word	0x400e0e00
-  402afc:	00402995 	.word	0x00402995
-  402b00:	00400675 	.word	0x00400675
-  402b04:	004005e1 	.word	0x004005e1
-  402b08:	004005e5 	.word	0x004005e5
-  402b0c:	400e1200 	.word	0x400e1200
-  402b10:	004029b9 	.word	0x004029b9
-  402b14:	20400c10 	.word	0x20400c10
-  402b18:	004016f1 	.word	0x004016f1
-  402b1c:	20400c18 	.word	0x20400c18
-  402b20:	20400c1c 	.word	0x20400c1c
-  402b24:	00400515 	.word	0x00400515
-  402b28:	e000e100 	.word	0xe000e100
-  402b2c:	20400c14 	.word	0x20400c14
-  402b30:	00401339 	.word	0x00401339
-  402b34:	00402fe1 	.word	0x00402fe1
-  402b38:	00406050 	.word	0x00406050
+  402aea:	e7d3      	b.n	402a94 <task_but+0xb8>
+  402aec:	400e0e00 	.word	0x400e0e00
+  402af0:	00402995 	.word	0x00402995
+  402af4:	00400675 	.word	0x00400675
+  402af8:	004005e1 	.word	0x004005e1
+  402afc:	e000e100 	.word	0xe000e100
+  402b00:	400e1200 	.word	0x400e1200
+  402b04:	004029b9 	.word	0x004029b9
+  402b08:	20400c10 	.word	0x20400c10
+  402b0c:	004016f1 	.word	0x004016f1
+  402b10:	20400c18 	.word	0x20400c18
+  402b14:	00400515 	.word	0x00400515
+  402b18:	004005e5 	.word	0x004005e5
+  402b1c:	20400c1c 	.word	0x20400c1c
+  402b20:	00401339 	.word	0x00401339
+  402b24:	00402fe1 	.word	0x00402fe1
+  402b28:	00406050 	.word	0x00406050
 
-00402b3c <usart_serial_getchar>:
+00402b2c <usart_serial_getchar>:
 	if (UART == (Uart*)p_usart) {
 		while (uart_read((Uart*)p_usart, data));
 	}
 #else
 # ifdef UART0
 	if (UART0 == (Uart*)p_usart) {
-  402b3c:	4b2d      	ldr	r3, [pc, #180]	; (402bf4 <usart_serial_getchar+0xb8>)
+  402b2c:	4b2d      	ldr	r3, [pc, #180]	; (402be4 <usart_serial_getchar+0xb8>)
 	uint32_t val = 0;
-  402b3e:	2200      	movs	r2, #0
+  402b2e:	2200      	movs	r2, #0
 {
-  402b40:	b5f0      	push	{r4, r5, r6, r7, lr}
+  402b30:	b5f0      	push	{r4, r5, r6, r7, lr}
 	if (UART0 == (Uart*)p_usart) {
-  402b42:	4298      	cmp	r0, r3
+  402b32:	4298      	cmp	r0, r3
 {
-  402b44:	b083      	sub	sp, #12
-  402b46:	4604      	mov	r4, r0
-  402b48:	460d      	mov	r5, r1
+  402b34:	b083      	sub	sp, #12
+  402b36:	4604      	mov	r4, r0
+  402b38:	460d      	mov	r5, r1
 	uint32_t val = 0;
-  402b4a:	9201      	str	r2, [sp, #4]
+  402b3a:	9201      	str	r2, [sp, #4]
 	if (UART0 == (Uart*)p_usart) {
-  402b4c:	d03a      	beq.n	402bc4 <usart_serial_getchar+0x88>
+  402b3c:	d03a      	beq.n	402bb4 <usart_serial_getchar+0x88>
 		while (uart_read((Uart*)p_usart, data));
 	}
 # endif
 # ifdef UART1
 	if (UART1 == (Uart*)p_usart) {
-  402b4e:	4b2a      	ldr	r3, [pc, #168]	; (402bf8 <usart_serial_getchar+0xbc>)
-  402b50:	4298      	cmp	r0, r3
-  402b52:	d03f      	beq.n	402bd4 <usart_serial_getchar+0x98>
+  402b3e:	4b2a      	ldr	r3, [pc, #168]	; (402be8 <usart_serial_getchar+0xbc>)
+  402b40:	4298      	cmp	r0, r3
+  402b42:	d03f      	beq.n	402bc4 <usart_serial_getchar+0x98>
 		while (uart_read((Uart*)p_usart, data));
 	}
 # endif
 # ifdef UART2
 	if (UART2 == (Uart*)p_usart) {
-  402b54:	4b29      	ldr	r3, [pc, #164]	; (402bfc <usart_serial_getchar+0xc0>)
-  402b56:	4298      	cmp	r0, r3
-  402b58:	d044      	beq.n	402be4 <usart_serial_getchar+0xa8>
+  402b44:	4b29      	ldr	r3, [pc, #164]	; (402bec <usart_serial_getchar+0xc0>)
+  402b46:	4298      	cmp	r0, r3
+  402b48:	d044      	beq.n	402bd4 <usart_serial_getchar+0xa8>
 		while (uart_read((Uart*)p_usart, data));
 	}
 # endif
 # ifdef UART3
 	if (UART3 == (Uart*)p_usart) {
-  402b5a:	4b29      	ldr	r3, [pc, #164]	; (402c00 <usart_serial_getchar+0xc4>)
-  402b5c:	4298      	cmp	r0, r3
-  402b5e:	d015      	beq.n	402b8c <usart_serial_getchar+0x50>
+  402b4a:	4b29      	ldr	r3, [pc, #164]	; (402bf0 <usart_serial_getchar+0xc4>)
+  402b4c:	4298      	cmp	r0, r3
+  402b4e:	d015      	beq.n	402b7c <usart_serial_getchar+0x50>
 		while (usart_read(p_usart, &val));
 		*data = (uint8_t)(val & 0xFF);
 	}
 #else
 # ifdef USART0
 	if (USART0 == p_usart) {
-  402b60:	4b28      	ldr	r3, [pc, #160]	; (402c04 <usart_serial_getchar+0xc8>)
-  402b62:	4298      	cmp	r0, r3
-  402b64:	d024      	beq.n	402bb0 <usart_serial_getchar+0x74>
+  402b50:	4b28      	ldr	r3, [pc, #160]	; (402bf4 <usart_serial_getchar+0xc8>)
+  402b52:	4298      	cmp	r0, r3
+  402b54:	d024      	beq.n	402ba0 <usart_serial_getchar+0x74>
 		while (usart_read(p_usart, &val));
 		*data = (uint8_t)(val & 0xFF);
 	}
 # endif
 # ifdef USART1
 	if (USART1 == p_usart) {
-  402b66:	4b28      	ldr	r3, [pc, #160]	; (402c08 <usart_serial_getchar+0xcc>)
-  402b68:	429c      	cmp	r4, r3
-  402b6a:	d017      	beq.n	402b9c <usart_serial_getchar+0x60>
+  402b56:	4b28      	ldr	r3, [pc, #160]	; (402bf8 <usart_serial_getchar+0xcc>)
+  402b58:	429c      	cmp	r4, r3
+  402b5a:	d017      	beq.n	402b8c <usart_serial_getchar+0x60>
 		while (usart_read(p_usart, &val));
 		*data = (uint8_t)(val & 0xFF);
 	}
 # endif
 # ifdef USART2
 	if (USART2 == p_usart) {
-  402b6c:	4b27      	ldr	r3, [pc, #156]	; (402c0c <usart_serial_getchar+0xd0>)
-  402b6e:	429c      	cmp	r4, r3
-  402b70:	d001      	beq.n	402b76 <usart_serial_getchar+0x3a>
+  402b5c:	4b27      	ldr	r3, [pc, #156]	; (402bfc <usart_serial_getchar+0xd0>)
+  402b5e:	429c      	cmp	r4, r3
+  402b60:	d001      	beq.n	402b66 <usart_serial_getchar+0x3a>
 		*data = (uint8_t)(val & 0xFF);
 	}
 # endif
 #endif /* ifdef USART */
 
 }
-  402b72:	b003      	add	sp, #12
-  402b74:	bdf0      	pop	{r4, r5, r6, r7, pc}
-  402b76:	af01      	add	r7, sp, #4
-  402b78:	4e25      	ldr	r6, [pc, #148]	; (402c10 <usart_serial_getchar+0xd4>)
+  402b62:	b003      	add	sp, #12
+  402b64:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  402b66:	af01      	add	r7, sp, #4
+  402b68:	4e25      	ldr	r6, [pc, #148]	; (402c00 <usart_serial_getchar+0xd4>)
 		while (usart_read(p_usart, &val));
-  402b7a:	4639      	mov	r1, r7
-  402b7c:	4620      	mov	r0, r4
-  402b7e:	47b0      	blx	r6
-  402b80:	2800      	cmp	r0, #0
-  402b82:	d1fa      	bne.n	402b7a <usart_serial_getchar+0x3e>
+  402b6a:	4639      	mov	r1, r7
+  402b6c:	4620      	mov	r0, r4
+  402b6e:	47b0      	blx	r6
+  402b70:	2800      	cmp	r0, #0
+  402b72:	d1fa      	bne.n	402b6a <usart_serial_getchar+0x3e>
 		*data = (uint8_t)(val & 0xFF);
-  402b84:	9b01      	ldr	r3, [sp, #4]
-  402b86:	702b      	strb	r3, [r5, #0]
+  402b74:	9b01      	ldr	r3, [sp, #4]
+  402b76:	702b      	strb	r3, [r5, #0]
+}
+  402b78:	b003      	add	sp, #12
+  402b7a:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  402b7c:	4e21      	ldr	r6, [pc, #132]	; (402c04 <usart_serial_getchar+0xd8>)
+		while (uart_read((Uart*)p_usart, data));
+  402b7e:	4629      	mov	r1, r5
+  402b80:	4620      	mov	r0, r4
+  402b82:	47b0      	blx	r6
+  402b84:	2800      	cmp	r0, #0
+  402b86:	d1fa      	bne.n	402b7e <usart_serial_getchar+0x52>
 }
   402b88:	b003      	add	sp, #12
   402b8a:	bdf0      	pop	{r4, r5, r6, r7, pc}
-  402b8c:	4e21      	ldr	r6, [pc, #132]	; (402c14 <usart_serial_getchar+0xd8>)
+  402b8c:	af01      	add	r7, sp, #4
+  402b8e:	4e1c      	ldr	r6, [pc, #112]	; (402c00 <usart_serial_getchar+0xd4>)
+		while (usart_read(p_usart, &val));
+  402b90:	4639      	mov	r1, r7
+  402b92:	4620      	mov	r0, r4
+  402b94:	47b0      	blx	r6
+  402b96:	2800      	cmp	r0, #0
+  402b98:	d1fa      	bne.n	402b90 <usart_serial_getchar+0x64>
+		*data = (uint8_t)(val & 0xFF);
+  402b9a:	9b01      	ldr	r3, [sp, #4]
+  402b9c:	702b      	strb	r3, [r5, #0]
+  402b9e:	e7eb      	b.n	402b78 <usart_serial_getchar+0x4c>
+  402ba0:	af01      	add	r7, sp, #4
+  402ba2:	4e17      	ldr	r6, [pc, #92]	; (402c00 <usart_serial_getchar+0xd4>)
+		while (usart_read(p_usart, &val));
+  402ba4:	4639      	mov	r1, r7
+  402ba6:	4620      	mov	r0, r4
+  402ba8:	47b0      	blx	r6
+  402baa:	2800      	cmp	r0, #0
+  402bac:	d1fa      	bne.n	402ba4 <usart_serial_getchar+0x78>
+		*data = (uint8_t)(val & 0xFF);
+  402bae:	9b01      	ldr	r3, [sp, #4]
+  402bb0:	702b      	strb	r3, [r5, #0]
+  402bb2:	e7e1      	b.n	402b78 <usart_serial_getchar+0x4c>
+  402bb4:	4e13      	ldr	r6, [pc, #76]	; (402c04 <usart_serial_getchar+0xd8>)
 		while (uart_read((Uart*)p_usart, data));
-  402b8e:	4629      	mov	r1, r5
-  402b90:	4620      	mov	r0, r4
-  402b92:	47b0      	blx	r6
-  402b94:	2800      	cmp	r0, #0
-  402b96:	d1fa      	bne.n	402b8e <usart_serial_getchar+0x52>
-}
-  402b98:	b003      	add	sp, #12
-  402b9a:	bdf0      	pop	{r4, r5, r6, r7, pc}
-  402b9c:	af01      	add	r7, sp, #4
-  402b9e:	4e1c      	ldr	r6, [pc, #112]	; (402c10 <usart_serial_getchar+0xd4>)
-		while (usart_read(p_usart, &val));
-  402ba0:	4639      	mov	r1, r7
-  402ba2:	4620      	mov	r0, r4
-  402ba4:	47b0      	blx	r6
-  402ba6:	2800      	cmp	r0, #0
-  402ba8:	d1fa      	bne.n	402ba0 <usart_serial_getchar+0x64>
-		*data = (uint8_t)(val & 0xFF);
-  402baa:	9b01      	ldr	r3, [sp, #4]
-  402bac:	702b      	strb	r3, [r5, #0]
-  402bae:	e7eb      	b.n	402b88 <usart_serial_getchar+0x4c>
-  402bb0:	af01      	add	r7, sp, #4
-  402bb2:	4e17      	ldr	r6, [pc, #92]	; (402c10 <usart_serial_getchar+0xd4>)
-		while (usart_read(p_usart, &val));
-  402bb4:	4639      	mov	r1, r7
-  402bb6:	4620      	mov	r0, r4
-  402bb8:	47b0      	blx	r6
-  402bba:	2800      	cmp	r0, #0
-  402bbc:	d1fa      	bne.n	402bb4 <usart_serial_getchar+0x78>
-		*data = (uint8_t)(val & 0xFF);
-  402bbe:	9b01      	ldr	r3, [sp, #4]
-  402bc0:	702b      	strb	r3, [r5, #0]
-  402bc2:	e7e1      	b.n	402b88 <usart_serial_getchar+0x4c>
-  402bc4:	4e13      	ldr	r6, [pc, #76]	; (402c14 <usart_serial_getchar+0xd8>)
+  402bb6:	4607      	mov	r7, r0
+  402bb8:	4629      	mov	r1, r5
+  402bba:	4638      	mov	r0, r7
+  402bbc:	47b0      	blx	r6
+  402bbe:	2800      	cmp	r0, #0
+  402bc0:	d1fa      	bne.n	402bb8 <usart_serial_getchar+0x8c>
+  402bc2:	e7c8      	b.n	402b56 <usart_serial_getchar+0x2a>
+  402bc4:	4e0f      	ldr	r6, [pc, #60]	; (402c04 <usart_serial_getchar+0xd8>)
 		while (uart_read((Uart*)p_usart, data));
   402bc6:	4607      	mov	r7, r0
   402bc8:	4629      	mov	r1, r5
   402bca:	4638      	mov	r0, r7
   402bcc:	47b0      	blx	r6
   402bce:	2800      	cmp	r0, #0
-  402bd0:	d1fa      	bne.n	402bc8 <usart_serial_getchar+0x8c>
-  402bd2:	e7c8      	b.n	402b66 <usart_serial_getchar+0x2a>
-  402bd4:	4e0f      	ldr	r6, [pc, #60]	; (402c14 <usart_serial_getchar+0xd8>)
+  402bd0:	d1fa      	bne.n	402bc8 <usart_serial_getchar+0x9c>
+  402bd2:	e7c0      	b.n	402b56 <usart_serial_getchar+0x2a>
+  402bd4:	4e0b      	ldr	r6, [pc, #44]	; (402c04 <usart_serial_getchar+0xd8>)
 		while (uart_read((Uart*)p_usart, data));
   402bd6:	4607      	mov	r7, r0
   402bd8:	4629      	mov	r1, r5
   402bda:	4638      	mov	r0, r7
   402bdc:	47b0      	blx	r6
   402bde:	2800      	cmp	r0, #0
-  402be0:	d1fa      	bne.n	402bd8 <usart_serial_getchar+0x9c>
-  402be2:	e7c0      	b.n	402b66 <usart_serial_getchar+0x2a>
-  402be4:	4e0b      	ldr	r6, [pc, #44]	; (402c14 <usart_serial_getchar+0xd8>)
-		while (uart_read((Uart*)p_usart, data));
-  402be6:	4607      	mov	r7, r0
-  402be8:	4629      	mov	r1, r5
-  402bea:	4638      	mov	r0, r7
-  402bec:	47b0      	blx	r6
-  402bee:	2800      	cmp	r0, #0
-  402bf0:	d1fa      	bne.n	402be8 <usart_serial_getchar+0xac>
-  402bf2:	e7bb      	b.n	402b6c <usart_serial_getchar+0x30>
-  402bf4:	400e0800 	.word	0x400e0800
-  402bf8:	400e0a00 	.word	0x400e0a00
-  402bfc:	400e1a00 	.word	0x400e1a00
-  402c00:	400e1c00 	.word	0x400e1c00
-  402c04:	40024000 	.word	0x40024000
-  402c08:	40028000 	.word	0x40028000
-  402c0c:	4002c000 	.word	0x4002c000
-  402c10:	004009a1 	.word	0x004009a1
-  402c14:	004008a1 	.word	0x004008a1
+  402be0:	d1fa      	bne.n	402bd8 <usart_serial_getchar+0xac>
+  402be2:	e7bb      	b.n	402b5c <usart_serial_getchar+0x30>
+  402be4:	400e0800 	.word	0x400e0800
+  402be8:	400e0a00 	.word	0x400e0a00
+  402bec:	400e1a00 	.word	0x400e1a00
+  402bf0:	400e1c00 	.word	0x400e1c00
+  402bf4:	40024000 	.word	0x40024000
+  402bf8:	40028000 	.word	0x40028000
+  402bfc:	4002c000 	.word	0x4002c000
+  402c00:	004009a1 	.word	0x004009a1
+  402c04:	004008a1 	.word	0x004008a1
 
-00402c18 <usart_serial_putchar>:
+00402c08 <usart_serial_putchar>:
 	if (UART0 == (Uart*)p_usart) {
-  402c18:	4b2a      	ldr	r3, [pc, #168]	; (402cc4 <usart_serial_putchar+0xac>)
-  402c1a:	4298      	cmp	r0, r3
+  402c08:	4b2a      	ldr	r3, [pc, #168]	; (402cb4 <usart_serial_putchar+0xac>)
+  402c0a:	4298      	cmp	r0, r3
 {
-  402c1c:	b570      	push	{r4, r5, r6, lr}
-  402c1e:	460d      	mov	r5, r1
+  402c0c:	b570      	push	{r4, r5, r6, lr}
+  402c0e:	460d      	mov	r5, r1
 	if (UART0 == (Uart*)p_usart) {
-  402c20:	d01c      	beq.n	402c5c <usart_serial_putchar+0x44>
+  402c10:	d01c      	beq.n	402c4c <usart_serial_putchar+0x44>
 	if (UART1 == (Uart*)p_usart) {
-  402c22:	4b29      	ldr	r3, [pc, #164]	; (402cc8 <usart_serial_putchar+0xb0>)
-  402c24:	4298      	cmp	r0, r3
-  402c26:	d022      	beq.n	402c6e <usart_serial_putchar+0x56>
+  402c12:	4b29      	ldr	r3, [pc, #164]	; (402cb8 <usart_serial_putchar+0xb0>)
+  402c14:	4298      	cmp	r0, r3
+  402c16:	d022      	beq.n	402c5e <usart_serial_putchar+0x56>
 	if (UART2 == (Uart*)p_usart) {
-  402c28:	4b28      	ldr	r3, [pc, #160]	; (402ccc <usart_serial_putchar+0xb4>)
-  402c2a:	4298      	cmp	r0, r3
-  402c2c:	d028      	beq.n	402c80 <usart_serial_putchar+0x68>
+  402c18:	4b28      	ldr	r3, [pc, #160]	; (402cbc <usart_serial_putchar+0xb4>)
+  402c1a:	4298      	cmp	r0, r3
+  402c1c:	d028      	beq.n	402c70 <usart_serial_putchar+0x68>
 	if (UART3 == (Uart*)p_usart) {
-  402c2e:	4b28      	ldr	r3, [pc, #160]	; (402cd0 <usart_serial_putchar+0xb8>)
-  402c30:	4298      	cmp	r0, r3
-  402c32:	d02e      	beq.n	402c92 <usart_serial_putchar+0x7a>
+  402c1e:	4b28      	ldr	r3, [pc, #160]	; (402cc0 <usart_serial_putchar+0xb8>)
+  402c20:	4298      	cmp	r0, r3
+  402c22:	d02e      	beq.n	402c82 <usart_serial_putchar+0x7a>
 	if (USART0 == p_usart) {
-  402c34:	4b27      	ldr	r3, [pc, #156]	; (402cd4 <usart_serial_putchar+0xbc>)
-  402c36:	4298      	cmp	r0, r3
-  402c38:	d007      	beq.n	402c4a <usart_serial_putchar+0x32>
+  402c24:	4b27      	ldr	r3, [pc, #156]	; (402cc4 <usart_serial_putchar+0xbc>)
+  402c26:	4298      	cmp	r0, r3
+  402c28:	d007      	beq.n	402c3a <usart_serial_putchar+0x32>
 	if (USART1 == p_usart) {
-  402c3a:	4b27      	ldr	r3, [pc, #156]	; (402cd8 <usart_serial_putchar+0xc0>)
-  402c3c:	4298      	cmp	r0, r3
-  402c3e:	d038      	beq.n	402cb2 <usart_serial_putchar+0x9a>
+  402c2a:	4b27      	ldr	r3, [pc, #156]	; (402cc8 <usart_serial_putchar+0xc0>)
+  402c2c:	4298      	cmp	r0, r3
+  402c2e:	d038      	beq.n	402ca2 <usart_serial_putchar+0x9a>
 	if (USART2 == p_usart) {
-  402c40:	4b26      	ldr	r3, [pc, #152]	; (402cdc <usart_serial_putchar+0xc4>)
-  402c42:	4298      	cmp	r0, r3
-  402c44:	d02d      	beq.n	402ca2 <usart_serial_putchar+0x8a>
+  402c30:	4b26      	ldr	r3, [pc, #152]	; (402ccc <usart_serial_putchar+0xc4>)
+  402c32:	4298      	cmp	r0, r3
+  402c34:	d02d      	beq.n	402c92 <usart_serial_putchar+0x8a>
 	return 0;
-  402c46:	2000      	movs	r0, #0
+  402c36:	2000      	movs	r0, #0
 }
-  402c48:	bd70      	pop	{r4, r5, r6, pc}
+  402c38:	bd70      	pop	{r4, r5, r6, pc}
 		while (usart_write(p_usart, c)!=0);
-  402c4a:	4604      	mov	r4, r0
-  402c4c:	4e24      	ldr	r6, [pc, #144]	; (402ce0 <usart_serial_putchar+0xc8>)
-  402c4e:	4629      	mov	r1, r5
-  402c50:	4620      	mov	r0, r4
-  402c52:	47b0      	blx	r6
-  402c54:	2800      	cmp	r0, #0
-  402c56:	d1fa      	bne.n	402c4e <usart_serial_putchar+0x36>
+  402c3a:	4604      	mov	r4, r0
+  402c3c:	4e24      	ldr	r6, [pc, #144]	; (402cd0 <usart_serial_putchar+0xc8>)
+  402c3e:	4629      	mov	r1, r5
+  402c40:	4620      	mov	r0, r4
+  402c42:	47b0      	blx	r6
+  402c44:	2800      	cmp	r0, #0
+  402c46:	d1fa      	bne.n	402c3e <usart_serial_putchar+0x36>
 		return 1;
-  402c58:	2001      	movs	r0, #1
-  402c5a:	bd70      	pop	{r4, r5, r6, pc}
+  402c48:	2001      	movs	r0, #1
+  402c4a:	bd70      	pop	{r4, r5, r6, pc}
 		while (uart_write((Uart*)p_usart, c)!=0);
-  402c5c:	4604      	mov	r4, r0
-  402c5e:	4e21      	ldr	r6, [pc, #132]	; (402ce4 <usart_serial_putchar+0xcc>)
-  402c60:	4629      	mov	r1, r5
-  402c62:	4620      	mov	r0, r4
-  402c64:	47b0      	blx	r6
-  402c66:	2800      	cmp	r0, #0
-  402c68:	d1fa      	bne.n	402c60 <usart_serial_putchar+0x48>
+  402c4c:	4604      	mov	r4, r0
+  402c4e:	4e21      	ldr	r6, [pc, #132]	; (402cd4 <usart_serial_putchar+0xcc>)
+  402c50:	4629      	mov	r1, r5
+  402c52:	4620      	mov	r0, r4
+  402c54:	47b0      	blx	r6
+  402c56:	2800      	cmp	r0, #0
+  402c58:	d1fa      	bne.n	402c50 <usart_serial_putchar+0x48>
 		return 1;
-  402c6a:	2001      	movs	r0, #1
-  402c6c:	bd70      	pop	{r4, r5, r6, pc}
+  402c5a:	2001      	movs	r0, #1
+  402c5c:	bd70      	pop	{r4, r5, r6, pc}
 		while (uart_write((Uart*)p_usart, c)!=0);
-  402c6e:	4604      	mov	r4, r0
-  402c70:	4e1c      	ldr	r6, [pc, #112]	; (402ce4 <usart_serial_putchar+0xcc>)
-  402c72:	4629      	mov	r1, r5
-  402c74:	4620      	mov	r0, r4
-  402c76:	47b0      	blx	r6
-  402c78:	2800      	cmp	r0, #0
-  402c7a:	d1fa      	bne.n	402c72 <usart_serial_putchar+0x5a>
+  402c5e:	4604      	mov	r4, r0
+  402c60:	4e1c      	ldr	r6, [pc, #112]	; (402cd4 <usart_serial_putchar+0xcc>)
+  402c62:	4629      	mov	r1, r5
+  402c64:	4620      	mov	r0, r4
+  402c66:	47b0      	blx	r6
+  402c68:	2800      	cmp	r0, #0
+  402c6a:	d1fa      	bne.n	402c62 <usart_serial_putchar+0x5a>
 		return 1;
-  402c7c:	2001      	movs	r0, #1
-  402c7e:	bd70      	pop	{r4, r5, r6, pc}
+  402c6c:	2001      	movs	r0, #1
+  402c6e:	bd70      	pop	{r4, r5, r6, pc}
 		while (uart_write((Uart*)p_usart, c)!=0);
-  402c80:	4604      	mov	r4, r0
-  402c82:	4e18      	ldr	r6, [pc, #96]	; (402ce4 <usart_serial_putchar+0xcc>)
-  402c84:	4629      	mov	r1, r5
-  402c86:	4620      	mov	r0, r4
-  402c88:	47b0      	blx	r6
-  402c8a:	2800      	cmp	r0, #0
-  402c8c:	d1fa      	bne.n	402c84 <usart_serial_putchar+0x6c>
+  402c70:	4604      	mov	r4, r0
+  402c72:	4e18      	ldr	r6, [pc, #96]	; (402cd4 <usart_serial_putchar+0xcc>)
+  402c74:	4629      	mov	r1, r5
+  402c76:	4620      	mov	r0, r4
+  402c78:	47b0      	blx	r6
+  402c7a:	2800      	cmp	r0, #0
+  402c7c:	d1fa      	bne.n	402c74 <usart_serial_putchar+0x6c>
 		return 1;
-  402c8e:	2001      	movs	r0, #1
-  402c90:	bd70      	pop	{r4, r5, r6, pc}
+  402c7e:	2001      	movs	r0, #1
+  402c80:	bd70      	pop	{r4, r5, r6, pc}
 		while (uart_write((Uart*)p_usart, c)!=0);
+  402c82:	4604      	mov	r4, r0
+  402c84:	4e13      	ldr	r6, [pc, #76]	; (402cd4 <usart_serial_putchar+0xcc>)
+  402c86:	4629      	mov	r1, r5
+  402c88:	4620      	mov	r0, r4
+  402c8a:	47b0      	blx	r6
+  402c8c:	2800      	cmp	r0, #0
+  402c8e:	d1fa      	bne.n	402c86 <usart_serial_putchar+0x7e>
+  402c90:	e7da      	b.n	402c48 <usart_serial_putchar+0x40>
+		while (usart_write(p_usart, c)!=0);
   402c92:	4604      	mov	r4, r0
-  402c94:	4e13      	ldr	r6, [pc, #76]	; (402ce4 <usart_serial_putchar+0xcc>)
+  402c94:	4e0e      	ldr	r6, [pc, #56]	; (402cd0 <usart_serial_putchar+0xc8>)
   402c96:	4629      	mov	r1, r5
   402c98:	4620      	mov	r0, r4
   402c9a:	47b0      	blx	r6
   402c9c:	2800      	cmp	r0, #0
-  402c9e:	d1fa      	bne.n	402c96 <usart_serial_putchar+0x7e>
-  402ca0:	e7da      	b.n	402c58 <usart_serial_putchar+0x40>
+  402c9e:	d1fa      	bne.n	402c96 <usart_serial_putchar+0x8e>
+  402ca0:	e7d2      	b.n	402c48 <usart_serial_putchar+0x40>
 		while (usart_write(p_usart, c)!=0);
   402ca2:	4604      	mov	r4, r0
-  402ca4:	4e0e      	ldr	r6, [pc, #56]	; (402ce0 <usart_serial_putchar+0xc8>)
+  402ca4:	4e0a      	ldr	r6, [pc, #40]	; (402cd0 <usart_serial_putchar+0xc8>)
   402ca6:	4629      	mov	r1, r5
   402ca8:	4620      	mov	r0, r4
   402caa:	47b0      	blx	r6
   402cac:	2800      	cmp	r0, #0
-  402cae:	d1fa      	bne.n	402ca6 <usart_serial_putchar+0x8e>
-  402cb0:	e7d2      	b.n	402c58 <usart_serial_putchar+0x40>
-		while (usart_write(p_usart, c)!=0);
-  402cb2:	4604      	mov	r4, r0
-  402cb4:	4e0a      	ldr	r6, [pc, #40]	; (402ce0 <usart_serial_putchar+0xc8>)
-  402cb6:	4629      	mov	r1, r5
-  402cb8:	4620      	mov	r0, r4
-  402cba:	47b0      	blx	r6
-  402cbc:	2800      	cmp	r0, #0
-  402cbe:	d1fa      	bne.n	402cb6 <usart_serial_putchar+0x9e>
-  402cc0:	e7ca      	b.n	402c58 <usart_serial_putchar+0x40>
-  402cc2:	bf00      	nop
-  402cc4:	400e0800 	.word	0x400e0800
-  402cc8:	400e0a00 	.word	0x400e0a00
-  402ccc:	400e1a00 	.word	0x400e1a00
-  402cd0:	400e1c00 	.word	0x400e1c00
-  402cd4:	40024000 	.word	0x40024000
-  402cd8:	40028000 	.word	0x40028000
-  402cdc:	4002c000 	.word	0x4002c000
-  402ce0:	00400989 	.word	0x00400989
-  402ce4:	00400891 	.word	0x00400891
+  402cae:	d1fa      	bne.n	402ca6 <usart_serial_putchar+0x9e>
+  402cb0:	e7ca      	b.n	402c48 <usart_serial_putchar+0x40>
+  402cb2:	bf00      	nop
+  402cb4:	400e0800 	.word	0x400e0800
+  402cb8:	400e0a00 	.word	0x400e0a00
+  402cbc:	400e1a00 	.word	0x400e1a00
+  402cc0:	400e1c00 	.word	0x400e1c00
+  402cc4:	40024000 	.word	0x40024000
+  402cc8:	40028000 	.word	0x40028000
+  402ccc:	4002c000 	.word	0x4002c000
+  402cd0:	00400989 	.word	0x00400989
+  402cd4:	00400891 	.word	0x00400891
 
-00402ce8 <vApplicationStackOverflowHook>:
+00402cd8 <vApplicationStackOverflowHook>:
 signed char *pcTaskName) {
-  402ce8:	b508      	push	{r3, lr}
+  402cd8:	b508      	push	{r3, lr}
 	printf("stack overflow %x %s\r\n", pxTask, (portCHAR *)pcTaskName);
-  402cea:	460a      	mov	r2, r1
-  402cec:	4b02      	ldr	r3, [pc, #8]	; (402cf8 <vApplicationStackOverflowHook+0x10>)
-  402cee:	4601      	mov	r1, r0
-  402cf0:	4802      	ldr	r0, [pc, #8]	; (402cfc <vApplicationStackOverflowHook+0x14>)
-  402cf2:	4798      	blx	r3
-  402cf4:	e7fe      	b.n	402cf4 <vApplicationStackOverflowHook+0xc>
-  402cf6:	bf00      	nop
-  402cf8:	00402fe1 	.word	0x00402fe1
-  402cfc:	00406070 	.word	0x00406070
+  402cda:	460a      	mov	r2, r1
+  402cdc:	4b02      	ldr	r3, [pc, #8]	; (402ce8 <vApplicationStackOverflowHook+0x10>)
+  402cde:	4601      	mov	r1, r0
+  402ce0:	4802      	ldr	r0, [pc, #8]	; (402cec <vApplicationStackOverflowHook+0x14>)
+  402ce2:	4798      	blx	r3
+  402ce4:	e7fe      	b.n	402ce4 <vApplicationStackOverflowHook+0xc>
+  402ce6:	bf00      	nop
+  402ce8:	00402fe1 	.word	0x00402fe1
+  402cec:	00406070 	.word	0x00406070
 
-00402d00 <vApplicationTickHook>:
+00402cf0 <vApplicationTickHook>:
 extern void vApplicationTickHook(void) {}
-  402d00:	4770      	bx	lr
-  402d02:	bf00      	nop
+  402cf0:	4770      	bx	lr
+  402cf2:	bf00      	nop
 
-00402d04 <vApplicationMallocFailedHook>:
+00402cf4 <vApplicationMallocFailedHook>:
 
 portFORCE_INLINE static void vPortRaiseBASEPRI( void )
 {
 uint32_t ulNewBASEPRI;
 
 	__asm volatile
-  402d04:	f04f 0380 	mov.w	r3, #128	; 0x80
-  402d08:	b672      	cpsid	i
-  402d0a:	f383 8811 	msr	BASEPRI, r3
-  402d0e:	f3bf 8f6f 	isb	sy
-  402d12:	f3bf 8f4f 	dsb	sy
-  402d16:	b662      	cpsie	i
-  402d18:	e7fe      	b.n	402d18 <vApplicationMallocFailedHook+0x14>
-  402d1a:	bf00      	nop
+  402cf4:	f04f 0380 	mov.w	r3, #128	; 0x80
+  402cf8:	b672      	cpsid	i
+  402cfa:	f383 8811 	msr	BASEPRI, r3
+  402cfe:	f3bf 8f6f 	isb	sy
+  402d02:	f3bf 8f4f 	dsb	sy
+  402d06:	b662      	cpsie	i
+  402d08:	e7fe      	b.n	402d08 <vApplicationMallocFailedHook+0x14>
+  402d0a:	bf00      	nop
 
-00402d1c <pin_toggle>:
+00402d0c <pin_toggle>:
 void pin_toggle(Pio *pio, uint32_t mask) {
-  402d1c:	b570      	push	{r4, r5, r6, lr}
-  402d1e:	460d      	mov	r5, r1
+  402d0c:	b570      	push	{r4, r5, r6, lr}
+  402d0e:	460d      	mov	r5, r1
 	if (pio_get_output_data_status(pio, mask))
-  402d20:	4b07      	ldr	r3, [pc, #28]	; (402d40 <pin_toggle+0x24>)
+  402d10:	4b07      	ldr	r3, [pc, #28]	; (402d30 <pin_toggle+0x24>)
 void pin_toggle(Pio *pio, uint32_t mask) {
-  402d22:	4604      	mov	r4, r0
+  402d12:	4604      	mov	r4, r0
 	if (pio_get_output_data_status(pio, mask))
-  402d24:	4798      	blx	r3
+  402d14:	4798      	blx	r3
 	pio_clear(pio, mask);
-  402d26:	4629      	mov	r1, r5
+  402d16:	4629      	mov	r1, r5
 	if (pio_get_output_data_status(pio, mask))
-  402d28:	b920      	cbnz	r0, 402d34 <pin_toggle+0x18>
+  402d18:	b920      	cbnz	r0, 402d24 <pin_toggle+0x18>
 	pio_set(pio, mask);
-  402d2a:	4620      	mov	r0, r4
-  402d2c:	4b05      	ldr	r3, [pc, #20]	; (402d44 <pin_toggle+0x28>)
+  402d1a:	4620      	mov	r0, r4
+  402d1c:	4b05      	ldr	r3, [pc, #20]	; (402d34 <pin_toggle+0x28>)
 }
-  402d2e:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  402d1e:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
 	pio_set(pio, mask);
-  402d32:	4718      	bx	r3
+  402d22:	4718      	bx	r3
 	pio_clear(pio, mask);
-  402d34:	4620      	mov	r0, r4
-  402d36:	4b04      	ldr	r3, [pc, #16]	; (402d48 <pin_toggle+0x2c>)
+  402d24:	4620      	mov	r0, r4
+  402d26:	4b04      	ldr	r3, [pc, #16]	; (402d38 <pin_toggle+0x2c>)
 }
-  402d38:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  402d28:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
 	pio_clear(pio, mask);
-  402d3c:	4718      	bx	r3
-  402d3e:	bf00      	nop
-  402d40:	004005d5 	.word	0x004005d5
-  402d44:	00400441 	.word	0x00400441
-  402d48:	00400445 	.word	0x00400445
+  402d2c:	4718      	bx	r3
+  402d2e:	bf00      	nop
+  402d30:	004005d5 	.word	0x004005d5
+  402d34:	00400441 	.word	0x00400441
+  402d38:	00400445 	.word	0x00400445
 
-00402d4c <LED_init>:
+00402d3c <LED_init>:
 void LED_init(int estado){
-  402d4c:	b510      	push	{r4, lr}
+  402d3c:	b510      	push	{r4, lr}
 	pmc_enable_periph_clk(LED_PIO_ID);
-  402d4e:	4b07      	ldr	r3, [pc, #28]	; (402d6c <LED_init+0x20>)
+  402d3e:	4b07      	ldr	r3, [pc, #28]	; (402d5c <LED_init+0x20>)
 void LED_init(int estado){
-  402d50:	b082      	sub	sp, #8
-  402d52:	4604      	mov	r4, r0
+  402d40:	b082      	sub	sp, #8
+  402d42:	4604      	mov	r4, r0
 	pmc_enable_periph_clk(LED_PIO_ID);
-  402d54:	200c      	movs	r0, #12
-  402d56:	4798      	blx	r3
+  402d44:	200c      	movs	r0, #12
+  402d46:	4798      	blx	r3
 	pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0);
-  402d58:	2300      	movs	r3, #0
-  402d5a:	4622      	mov	r2, r4
-  402d5c:	f44f 7180 	mov.w	r1, #256	; 0x100
-  402d60:	4803      	ldr	r0, [pc, #12]	; (402d70 <LED_init+0x24>)
-  402d62:	4c04      	ldr	r4, [pc, #16]	; (402d74 <LED_init+0x28>)
-  402d64:	9300      	str	r3, [sp, #0]
-  402d66:	47a0      	blx	r4
+  402d48:	2300      	movs	r3, #0
+  402d4a:	4622      	mov	r2, r4
+  402d4c:	f44f 7180 	mov.w	r1, #256	; 0x100
+  402d50:	4803      	ldr	r0, [pc, #12]	; (402d60 <LED_init+0x24>)
+  402d52:	4c04      	ldr	r4, [pc, #16]	; (402d64 <LED_init+0x28>)
+  402d54:	9300      	str	r3, [sp, #0]
+  402d56:	47a0      	blx	r4
 };
-  402d68:	b002      	add	sp, #8
-  402d6a:	bd10      	pop	{r4, pc}
-  402d6c:	00400849 	.word	0x00400849
-  402d70:	400e1200 	.word	0x400e1200
-  402d74:	004004e1 	.word	0x004004e1
+  402d58:	b002      	add	sp, #8
+  402d5a:	bd10      	pop	{r4, pc}
+  402d5c:	00400849 	.word	0x00400849
+  402d60:	400e1200 	.word	0x400e1200
+  402d64:	004004e1 	.word	0x004004e1
 
-00402d78 <task_led>:
+00402d68 <task_led>:
 static void task_led(void *pvParameters) {
-  402d78:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
-  402d7c:	b083      	sub	sp, #12
+  402d68:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  402d6c:	b083      	sub	sp, #12
 	LED_init(1);
-  402d7e:	4b14      	ldr	r3, [pc, #80]	; (402dd0 <task_led+0x58>)
-  402d80:	2001      	movs	r0, #1
+  402d6e:	4b14      	ldr	r3, [pc, #80]	; (402dc0 <task_led+0x58>)
+  402d70:	2001      	movs	r0, #1
 	uint32_t delayMs = 2000;
-  402d82:	f44f 64fa 	mov.w	r4, #2000	; 0x7d0
+  402d72:	f44f 64fa 	mov.w	r4, #2000	; 0x7d0
 	LED_init(1);
-  402d86:	4798      	blx	r3
+  402d76:	4798      	blx	r3
 	uint32_t msg = 0;
-  402d88:	ad02      	add	r5, sp, #8
-  402d8a:	2300      	movs	r3, #0
-  402d8c:	f8df a050 	ldr.w	sl, [pc, #80]	; 402de0 <task_led+0x68>
-  402d90:	f8df 9050 	ldr.w	r9, [pc, #80]	; 402de4 <task_led+0x6c>
-  402d94:	f8df 8050 	ldr.w	r8, [pc, #80]	; 402de8 <task_led+0x70>
-  402d98:	4f0e      	ldr	r7, [pc, #56]	; (402dd4 <task_led+0x5c>)
+  402d78:	ad02      	add	r5, sp, #8
+  402d7a:	2300      	movs	r3, #0
+  402d7c:	f8df a050 	ldr.w	sl, [pc, #80]	; 402dd0 <task_led+0x68>
+  402d80:	f8df 9050 	ldr.w	r9, [pc, #80]	; 402dd4 <task_led+0x6c>
+  402d84:	f8df 8050 	ldr.w	r8, [pc, #80]	; 402dd8 <task_led+0x70>
+  402d88:	4f0e      	ldr	r7, [pc, #56]	; (402dc4 <task_led+0x5c>)
 			printf("task_led: %d \n", delayMs);
-  402d9a:	f8df b050 	ldr.w	fp, [pc, #80]	; 402dec <task_led+0x74>
+  402d8a:	f8df b050 	ldr.w	fp, [pc, #80]	; 402ddc <task_led+0x74>
 		pin_toggle(LED_PIO, LED_IDX_MASK);
-  402d9e:	4e0e      	ldr	r6, [pc, #56]	; (402dd8 <task_led+0x60>)
+  402d8e:	4e0e      	ldr	r6, [pc, #56]	; (402dc8 <task_led+0x60>)
 	uint32_t msg = 0;
-  402da0:	f845 3d04 	str.w	r3, [r5, #-4]!
-  402da4:	e005      	b.n	402db2 <task_led+0x3a>
+  402d90:	f845 3d04 	str.w	r3, [r5, #-4]!
+  402d94:	e005      	b.n	402da2 <task_led+0x3a>
 		pin_toggle(LED_PIO, LED_IDX_MASK);
-  402da6:	4630      	mov	r0, r6
-  402da8:	f44f 7180 	mov.w	r1, #256	; 0x100
-  402dac:	47c0      	blx	r8
+  402d96:	4630      	mov	r0, r6
+  402d98:	f44f 7180 	mov.w	r1, #256	; 0x100
+  402d9c:	47c0      	blx	r8
 		vTaskDelay(delayMs);
-  402dae:	4620      	mov	r0, r4
-  402db0:	47b8      	blx	r7
-		if (xQueueReceive(xQueueLedFreq, &msg, (TickType_t) 0)) {
-  402db2:	2300      	movs	r3, #0
-  402db4:	4629      	mov	r1, r5
-  402db6:	f8da 0000 	ldr.w	r0, [sl]
-  402dba:	461a      	mov	r2, r3
-  402dbc:	47c8      	blx	r9
-  402dbe:	2800      	cmp	r0, #0
-  402dc0:	d0f1      	beq.n	402da6 <task_led+0x2e>
+  402d9e:	4620      	mov	r0, r4
+  402da0:	47b8      	blx	r7
+		if (xQueueReceive(xQueueAumentaLed, &msg, (TickType_t) 0)) {
+  402da2:	2300      	movs	r3, #0
+  402da4:	4629      	mov	r1, r5
+  402da6:	f8da 0000 	ldr.w	r0, [sl]
+  402daa:	461a      	mov	r2, r3
+  402dac:	47c8      	blx	r9
+  402dae:	2800      	cmp	r0, #0
+  402db0:	d0f1      	beq.n	402d96 <task_led+0x2e>
 			delayMs = msg / portTICK_PERIOD_MS;
-  402dc2:	9c01      	ldr	r4, [sp, #4]
+  402db2:	9c01      	ldr	r4, [sp, #4]
 			printf("task_led: %d \n", delayMs);
-  402dc4:	4658      	mov	r0, fp
-  402dc6:	4b05      	ldr	r3, [pc, #20]	; (402ddc <task_led+0x64>)
-  402dc8:	4621      	mov	r1, r4
-  402dca:	4798      	blx	r3
-  402dcc:	e7eb      	b.n	402da6 <task_led+0x2e>
-  402dce:	bf00      	nop
-  402dd0:	00402d4d 	.word	0x00402d4d
-  402dd4:	00401f55 	.word	0x00401f55
-  402dd8:	400e1200 	.word	0x400e1200
-  402ddc:	00402fe1 	.word	0x00402fe1
-  402de0:	20400c14 	.word	0x20400c14
-  402de4:	004016f1 	.word	0x004016f1
-  402de8:	00402d1d 	.word	0x00402d1d
-  402dec:	00406060 	.word	0x00406060
+  402db4:	4658      	mov	r0, fp
+  402db6:	4b05      	ldr	r3, [pc, #20]	; (402dcc <task_led+0x64>)
+  402db8:	4621      	mov	r1, r4
+  402dba:	4798      	blx	r3
+  402dbc:	e7eb      	b.n	402d96 <task_led+0x2e>
+  402dbe:	bf00      	nop
+  402dc0:	00402d3d 	.word	0x00402d3d
+  402dc4:	00401f55 	.word	0x00401f55
+  402dc8:	400e1200 	.word	0x400e1200
+  402dcc:	00402fe1 	.word	0x00402fe1
+  402dd0:	20400c1c 	.word	0x20400c1c
+  402dd4:	004016f1 	.word	0x004016f1
+  402dd8:	00402d0d 	.word	0x00402d0d
+  402ddc:	00406060 	.word	0x00406060
 
-00402df0 <main>:
+00402de0 <main>:
 /**
 *  \brief FreeRTOS Real Time Kernel example entry point.
 *
 *  \return Unused (ANSI-C compatibility).
 */
 int main(void) {
-  402df0:	b580      	push	{r7, lr}
+  402de0:	b580      	push	{r7, lr}
 	/* Initialize the SAM system */
 	sysclk_init();
-  402df2:	4b43      	ldr	r3, [pc, #268]	; (402f00 <main+0x110>)
+  402de2:	4b47      	ldr	r3, [pc, #284]	; (402f00 <main+0x120>)
 int main(void) {
-  402df4:	b08a      	sub	sp, #40	; 0x28
+  402de4:	b08a      	sub	sp, #40	; 0x28
 	sysclk_init();
-  402df6:	4798      	blx	r3
+  402de6:	4798      	blx	r3
  *
  */
 static inline void stdio_serial_init(volatile void *usart, const usart_serial_options_t *opt)
 {
 	stdio_base = (void *)usart;
 	ptr_put = (int (*)(void volatile*,char))&usart_serial_putchar;
-  402df8:	4e42      	ldr	r6, [pc, #264]	; (402f04 <main+0x114>)
+  402de8:	4e46      	ldr	r6, [pc, #280]	; (402f04 <main+0x124>)
 	board_init();
-  402dfa:	4b43      	ldr	r3, [pc, #268]	; (402f08 <main+0x118>)
+  402dea:	4b47      	ldr	r3, [pc, #284]	; (402f08 <main+0x128>)
 	usart_settings.stop_bits= opt->stopbits;
-  402dfc:	2500      	movs	r5, #0
-  402dfe:	4f43      	ldr	r7, [pc, #268]	; (402f0c <main+0x11c>)
-  402e00:	4798      	blx	r3
+  402dec:	2500      	movs	r5, #0
+  402dee:	4f47      	ldr	r7, [pc, #284]	; (402f0c <main+0x12c>)
+  402df0:	4798      	blx	r3
 	stdio_base = (void *)usart;
-  402e02:	4c43      	ldr	r4, [pc, #268]	; (402f10 <main+0x120>)
+  402df2:	4c47      	ldr	r4, [pc, #284]	; (402f10 <main+0x130>)
 	usart_settings.baudrate = opt->baudrate;
-  402e04:	f44f 33e1 	mov.w	r3, #115200	; 0x1c200
-  402e08:	4842      	ldr	r0, [pc, #264]	; (402f14 <main+0x124>)
+  402df4:	f44f 33e1 	mov.w	r3, #115200	; 0x1c200
+  402df8:	4846      	ldr	r0, [pc, #280]	; (402f14 <main+0x134>)
 	usart_settings.char_length = opt->charlength;
-  402e0a:	21c0      	movs	r1, #192	; 0xc0
+  402dfa:	21c0      	movs	r1, #192	; 0xc0
 	ptr_put = (int (*)(void volatile*,char))&usart_serial_putchar;
-  402e0c:	6037      	str	r7, [r6, #0]
+  402dfc:	6037      	str	r7, [r6, #0]
 	usart_settings.parity_type = opt->paritytype;
-  402e0e:	f44f 6200 	mov.w	r2, #2048	; 0x800
+  402dfe:	f44f 6200 	mov.w	r2, #2048	; 0x800
 	ptr_get = (void (*)(void volatile*,char*))&usart_serial_getchar;
-  402e12:	4e41      	ldr	r6, [pc, #260]	; (402f18 <main+0x128>)
-  402e14:	4f41      	ldr	r7, [pc, #260]	; (402f1c <main+0x12c>)
+  402e02:	4e45      	ldr	r6, [pc, #276]	; (402f18 <main+0x138>)
+  402e04:	4f45      	ldr	r7, [pc, #276]	; (402f1c <main+0x13c>)
 	stdio_base = (void *)usart;
-  402e16:	6004      	str	r4, [r0, #0]
+  402e06:	6004      	str	r4, [r0, #0]
  *
  * \param ul_id Id (number) of the peripheral clock.
  */
 static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
 {
 	pmc_enable_periph_clk(ul_id);
-  402e18:	200e      	movs	r0, #14
+  402e08:	200e      	movs	r0, #14
 	usart_settings.baudrate = opt->baudrate;
-  402e1a:	9304      	str	r3, [sp, #16]
-  402e1c:	4b40      	ldr	r3, [pc, #256]	; (402f20 <main+0x130>)
+  402e0a:	9304      	str	r3, [sp, #16]
+  402e0c:	4b44      	ldr	r3, [pc, #272]	; (402f20 <main+0x140>)
 	ptr_get = (void (*)(void volatile*,char*))&usart_serial_getchar;
-  402e1e:	6037      	str	r7, [r6, #0]
+  402e0e:	6037      	str	r7, [r6, #0]
 	usart_settings.char_length = opt->charlength;
-  402e20:	9105      	str	r1, [sp, #20]
+  402e10:	9105      	str	r1, [sp, #20]
 	usart_settings.parity_type = opt->paritytype;
-  402e22:	9206      	str	r2, [sp, #24]
+  402e12:	9206      	str	r2, [sp, #24]
 	usart_settings.stop_bits= opt->stopbits;
-  402e24:	9507      	str	r5, [sp, #28]
+  402e14:	9507      	str	r5, [sp, #28]
 	usart_settings.channel_mode= US_MR_CHMODE_NORMAL;
-  402e26:	9508      	str	r5, [sp, #32]
-  402e28:	4798      	blx	r3
+  402e16:	9508      	str	r5, [sp, #32]
+  402e18:	4798      	blx	r3
 		usart_init_rs232(p_usart, &usart_settings,
-  402e2a:	4a3e      	ldr	r2, [pc, #248]	; (402f24 <main+0x134>)
-  402e2c:	a904      	add	r1, sp, #16
-  402e2e:	4620      	mov	r0, r4
-  402e30:	4b3d      	ldr	r3, [pc, #244]	; (402f28 <main+0x138>)
-  402e32:	4798      	blx	r3
+  402e1a:	4a42      	ldr	r2, [pc, #264]	; (402f24 <main+0x144>)
+  402e1c:	a904      	add	r1, sp, #16
+  402e1e:	4620      	mov	r0, r4
+  402e20:	4b41      	ldr	r3, [pc, #260]	; (402f28 <main+0x148>)
+  402e22:	4798      	blx	r3
 	fdevopen((int (*)(char, FILE*))(_write),(int (*)(FILE*))(_read));
 #  endif
 #  if UC3 || SAM
 	// For AVR32 and SAM GCC
 	// Specify that stdout and stdin should not be buffered.
 	setbuf(stdout, NULL);
-  402e34:	4e3d      	ldr	r6, [pc, #244]	; (402f2c <main+0x13c>)
+  402e24:	4f41      	ldr	r7, [pc, #260]	; (402f2c <main+0x14c>)
 		usart_enable_tx(p_usart);
-  402e36:	4620      	mov	r0, r4
-  402e38:	4b3d      	ldr	r3, [pc, #244]	; (402f30 <main+0x140>)
-  402e3a:	4798      	blx	r3
+  402e26:	4620      	mov	r0, r4
+  402e28:	4b41      	ldr	r3, [pc, #260]	; (402f30 <main+0x150>)
+  402e2a:	4798      	blx	r3
 		usart_enable_rx(p_usart);
-  402e3c:	4620      	mov	r0, r4
-  402e3e:	4b3d      	ldr	r3, [pc, #244]	; (402f34 <main+0x144>)
-  402e40:	4798      	blx	r3
-  402e42:	6833      	ldr	r3, [r6, #0]
-  402e44:	4f3c      	ldr	r7, [pc, #240]	; (402f38 <main+0x148>)
-  402e46:	4629      	mov	r1, r5
-  402e48:	6898      	ldr	r0, [r3, #8]
-  402e4a:	47b8      	blx	r7
+  402e2c:	4620      	mov	r0, r4
+  402e2e:	4b41      	ldr	r3, [pc, #260]	; (402f34 <main+0x154>)
+  402e30:	4798      	blx	r3
+  402e32:	683b      	ldr	r3, [r7, #0]
+  402e34:	4e40      	ldr	r6, [pc, #256]	; (402f38 <main+0x158>)
+  402e36:	4629      	mov	r1, r5
+  402e38:	6898      	ldr	r0, [r3, #8]
+  402e3a:	47b0      	blx	r6
 	setbuf(stdin, NULL);
-  402e4c:	6833      	ldr	r3, [r6, #0]
-  402e4e:	4629      	mov	r1, r5
+  402e3c:	683b      	ldr	r3, [r7, #0]
+  402e3e:	4629      	mov	r1, r5
 	configure_console();
 	
 	printf("Sys init ok \n");
-  402e50:	4c3a      	ldr	r4, [pc, #232]	; (402f3c <main+0x14c>)
-  402e52:	6858      	ldr	r0, [r3, #4]
-  402e54:	47b8      	blx	r7
-	setbuf(stdout, NULL);
-  402e56:	6833      	ldr	r3, [r6, #0]
-  402e58:	4629      	mov	r1, r5
 
 	/* Attempt to create a semaphore. */
 	xSemaphoreBut = xSemaphoreCreateBinary();
-  402e5a:	4e39      	ldr	r6, [pc, #228]	; (402f40 <main+0x150>)
+  402e40:	f8df 8148 	ldr.w	r8, [pc, #328]	; 402f8c <main+0x1ac>
+  402e44:	6858      	ldr	r0, [r3, #4]
+  402e46:	47b0      	blx	r6
 	setbuf(stdout, NULL);
-  402e5c:	6898      	ldr	r0, [r3, #8]
-  402e5e:	47b8      	blx	r7
+  402e48:	683b      	ldr	r3, [r7, #0]
+  402e4a:	4629      	mov	r1, r5
 	printf("Sys init ok \n");
-  402e60:	4838      	ldr	r0, [pc, #224]	; (402f44 <main+0x154>)
-  402e62:	47a0      	blx	r4
+  402e4c:	4c3b      	ldr	r4, [pc, #236]	; (402f3c <main+0x15c>)
+	setbuf(stdout, NULL);
+  402e4e:	6898      	ldr	r0, [r3, #8]
+  402e50:	47b0      	blx	r6
+	printf("Sys init ok \n");
+  402e52:	483b      	ldr	r0, [pc, #236]	; (402f40 <main+0x160>)
+  402e54:	47a0      	blx	r4
 	xSemaphoreBut = xSemaphoreCreateBinary();
-  402e64:	4629      	mov	r1, r5
-  402e66:	2203      	movs	r2, #3
-  402e68:	2001      	movs	r0, #1
-  402e6a:	47b0      	blx	r6
-  402e6c:	4b36      	ldr	r3, [pc, #216]	; (402f48 <main+0x158>)
-  402e6e:	6018      	str	r0, [r3, #0]
+  402e56:	4e3b      	ldr	r6, [pc, #236]	; (402f44 <main+0x164>)
+  402e58:	4629      	mov	r1, r5
+  402e5a:	2203      	movs	r2, #3
+  402e5c:	2001      	movs	r0, #1
+	xSemaphoreBut2 = xSemaphoreCreateBinary();
+  402e5e:	4f3a      	ldr	r7, [pc, #232]	; (402f48 <main+0x168>)
+	xSemaphoreBut = xSemaphoreCreateBinary();
+  402e60:	47b0      	blx	r6
+	xSemaphoreBut2 = xSemaphoreCreateBinary();
+  402e62:	4629      	mov	r1, r5
+	xSemaphoreBut = xSemaphoreCreateBinary();
+  402e64:	f8c8 0000 	str.w	r0, [r8]
+	xSemaphoreBut2 = xSemaphoreCreateBinary();
+  402e68:	2203      	movs	r2, #3
+  402e6a:	2001      	movs	r0, #1
+  402e6c:	47b0      	blx	r6
 	if (xSemaphoreBut == NULL){
-  402e70:	2800      	cmp	r0, #0
-  402e72:	d041      	beq.n	402ef8 <main+0x108>
+  402e6e:	f8d8 3000 	ldr.w	r3, [r8]
+	xSemaphoreBut2 = xSemaphoreCreateBinary();
+  402e72:	6038      	str	r0, [r7, #0]
+	if (xSemaphoreBut == NULL){
+  402e74:	2b00      	cmp	r3, #0
+  402e76:	d03f      	beq.n	402ef8 <main+0x118>
 		printf("falha em criar o primeiro semaforo \n");
 	}
 	if (xSemaphoreBut2 == NULL){
-  402e74:	4b35      	ldr	r3, [pc, #212]	; (402f4c <main+0x15c>)
-  402e76:	681b      	ldr	r3, [r3, #0]
-  402e78:	2b00      	cmp	r3, #0
-  402e7a:	d03a      	beq.n	402ef2 <main+0x102>
+  402e78:	2800      	cmp	r0, #0
+  402e7a:	d03a      	beq.n	402ef2 <main+0x112>
 		printf("falha em criar o segundo semaforo \n");
 	}
 	
 	/* cria queue com 32 "espacos" */
 	/* cada espaço possui o tamanho de um inteiro*/
 	xQueueLedFreq = xQueueCreate(32, sizeof(uint32_t));
-  402e7c:	4f34      	ldr	r7, [pc, #208]	; (402f50 <main+0x160>)
+  402e7c:	4f33      	ldr	r7, [pc, #204]	; (402f4c <main+0x16c>)
   402e7e:	2200      	movs	r2, #0
   402e80:	2104      	movs	r1, #4
   402e82:	2020      	movs	r0, #32
@@ -7513,7 +7519,7 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
 	xQueueAumentaLed = xQueueCreate(32,sizeof(uint32_t));
   402e8a:	2104      	movs	r1, #4
   402e8c:	2020      	movs	r0, #32
-  402e8e:	4d31      	ldr	r5, [pc, #196]	; (402f54 <main+0x164>)
+  402e8e:	4d30      	ldr	r5, [pc, #192]	; (402f50 <main+0x170>)
   402e90:	47b0      	blx	r6
 	if (xQueueLedFreq == NULL){
   402e92:	683b      	ldr	r3, [r7, #0]
@@ -7521,34 +7527,34 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
   402e94:	6028      	str	r0, [r5, #0]
 	if (xQueueLedFreq == NULL){
   402e96:	2b00      	cmp	r3, #0
-  402e98:	d027      	beq.n	402eea <main+0xfa>
+  402e98:	d027      	beq.n	402eea <main+0x10a>
 		printf("falha em criar a primeira queue \n");
 	}
 	if (xQueueAumentaLed == NULL){
-  402e9a:	b318      	cbz	r0, 402ee4 <main+0xf4>
+  402e9a:	b318      	cbz	r0, 402ee4 <main+0x104>
 		printf("falha em criar a segunda queue \n");
 	}
 	/* Create task to make led blink */
 	if (xTaskCreate(task_led, "Led", TASK_LED_STACK_SIZE, NULL,
   402e9c:	2000      	movs	r0, #0
   402e9e:	f44f 6280 	mov.w	r2, #1024	; 0x400
-  402ea2:	492d      	ldr	r1, [pc, #180]	; (402f58 <main+0x168>)
+  402ea2:	492c      	ldr	r1, [pc, #176]	; (402f54 <main+0x174>)
   402ea4:	4603      	mov	r3, r0
   402ea6:	9003      	str	r0, [sp, #12]
   402ea8:	9002      	str	r0, [sp, #8]
   402eaa:	9001      	str	r0, [sp, #4]
   402eac:	9000      	str	r0, [sp, #0]
-  402eae:	4d2b      	ldr	r5, [pc, #172]	; (402f5c <main+0x16c>)
-  402eb0:	482b      	ldr	r0, [pc, #172]	; (402f60 <main+0x170>)
+  402eae:	4d2a      	ldr	r5, [pc, #168]	; (402f58 <main+0x178>)
+  402eb0:	482a      	ldr	r0, [pc, #168]	; (402f5c <main+0x17c>)
   402eb2:	47a8      	blx	r5
   402eb4:	2801      	cmp	r0, #1
 	TASK_LED_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create test led task\r\n");
   402eb6:	bf14      	ite	ne
-  402eb8:	482a      	ldrne	r0, [pc, #168]	; (402f64 <main+0x174>)
+  402eb8:	4829      	ldrne	r0, [pc, #164]	; (402f60 <main+0x180>)
 		} else {
 		printf("task led created \r\n");
-  402eba:	482b      	ldreq	r0, [pc, #172]	; (402f68 <main+0x178>)
+  402eba:	482a      	ldreq	r0, [pc, #168]	; (402f64 <main+0x184>)
   402ebc:	47a0      	blx	r4
 		
 	}
@@ -7556,56 +7562,56 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
 	if (xTaskCreate(task_but, "BUT", TASK_BUT_STACK_SIZE, NULL,
   402ebe:	2000      	movs	r0, #0
   402ec0:	f44f 6280 	mov.w	r2, #1024	; 0x400
-  402ec4:	4929      	ldr	r1, [pc, #164]	; (402f6c <main+0x17c>)
+  402ec4:	4928      	ldr	r1, [pc, #160]	; (402f68 <main+0x188>)
   402ec6:	4603      	mov	r3, r0
   402ec8:	9003      	str	r0, [sp, #12]
   402eca:	9002      	str	r0, [sp, #8]
   402ecc:	9001      	str	r0, [sp, #4]
   402ece:	9000      	str	r0, [sp, #0]
-  402ed0:	4827      	ldr	r0, [pc, #156]	; (402f70 <main+0x180>)
+  402ed0:	4826      	ldr	r0, [pc, #152]	; (402f6c <main+0x18c>)
   402ed2:	47a8      	blx	r5
   402ed4:	2801      	cmp	r0, #1
 	TASK_BUT_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create UartTx task\r\n");
   402ed6:	bf14      	ite	ne
-  402ed8:	4826      	ldrne	r0, [pc, #152]	; (402f74 <main+0x184>)
+  402ed8:	4825      	ldrne	r0, [pc, #148]	; (402f70 <main+0x190>)
 		} else {
 		printf("task led but \r\n");
-  402eda:	4827      	ldreq	r0, [pc, #156]	; (402f78 <main+0x188>)
+  402eda:	4826      	ldreq	r0, [pc, #152]	; (402f74 <main+0x194>)
   402edc:	47a0      	blx	r4
 	}
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
-  402ede:	4b27      	ldr	r3, [pc, #156]	; (402f7c <main+0x18c>)
+  402ede:	4b26      	ldr	r3, [pc, #152]	; (402f78 <main+0x198>)
   402ee0:	4798      	blx	r3
-  402ee2:	e7fe      	b.n	402ee2 <main+0xf2>
+  402ee2:	e7fe      	b.n	402ee2 <main+0x102>
 		printf("falha em criar a segunda queue \n");
-  402ee4:	4826      	ldr	r0, [pc, #152]	; (402f80 <main+0x190>)
+  402ee4:	4825      	ldr	r0, [pc, #148]	; (402f7c <main+0x19c>)
   402ee6:	47a0      	blx	r4
-  402ee8:	e7d8      	b.n	402e9c <main+0xac>
+  402ee8:	e7d8      	b.n	402e9c <main+0xbc>
 		printf("falha em criar a primeira queue \n");
-  402eea:	4826      	ldr	r0, [pc, #152]	; (402f84 <main+0x194>)
+  402eea:	4825      	ldr	r0, [pc, #148]	; (402f80 <main+0x1a0>)
   402eec:	47a0      	blx	r4
   402eee:	6828      	ldr	r0, [r5, #0]
-  402ef0:	e7d3      	b.n	402e9a <main+0xaa>
+  402ef0:	e7d3      	b.n	402e9a <main+0xba>
 		printf("falha em criar o segundo semaforo \n");
-  402ef2:	4825      	ldr	r0, [pc, #148]	; (402f88 <main+0x198>)
+  402ef2:	4824      	ldr	r0, [pc, #144]	; (402f84 <main+0x1a4>)
   402ef4:	47a0      	blx	r4
-  402ef6:	e7c1      	b.n	402e7c <main+0x8c>
+  402ef6:	e7c1      	b.n	402e7c <main+0x9c>
 		printf("falha em criar o primeiro semaforo \n");
-  402ef8:	4824      	ldr	r0, [pc, #144]	; (402f8c <main+0x19c>)
+  402ef8:	4823      	ldr	r0, [pc, #140]	; (402f88 <main+0x1a8>)
   402efa:	47a0      	blx	r4
-  402efc:	e7ba      	b.n	402e74 <main+0x84>
-  402efe:	bf00      	nop
+  402efc:	6838      	ldr	r0, [r7, #0]
+  402efe:	e7bb      	b.n	402e78 <main+0x98>
   402f00:	004001ad 	.word	0x004001ad
   402f04:	20400bc8 	.word	0x20400bc8
   402f08:	004002ad 	.word	0x004002ad
-  402f0c:	00402c19 	.word	0x00402c19
+  402f0c:	00402c09 	.word	0x00402c09
   402f10:	40028000 	.word	0x40028000
   402f14:	20400bcc 	.word	0x20400bcc
   402f18:	20400bc4 	.word	0x20400bc4
-  402f1c:	00402b3d 	.word	0x00402b3d
+  402f1c:	00402b2d 	.word	0x00402b2d
   402f20:	00400849 	.word	0x00400849
   402f24:	08f0d180 	.word	0x08f0d180
   402f28:	00400915 	.word	0x00400915
@@ -7614,26 +7620,26 @@ static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
   402f34:	00400981 	.word	0x00400981
   402f38:	00403795 	.word	0x00403795
   402f3c:	00402fe1 	.word	0x00402fe1
-  402f40:	004012cd 	.word	0x004012cd
-  402f44:	00405f3c 	.word	0x00405f3c
-  402f48:	20400c10 	.word	0x20400c10
-  402f4c:	20400c18 	.word	0x20400c18
-  402f50:	20400c14 	.word	0x20400c14
-  402f54:	20400c1c 	.word	0x20400c1c
-  402f58:	00405fe0 	.word	0x00405fe0
-  402f5c:	00401bc9 	.word	0x00401bc9
-  402f60:	00402d79 	.word	0x00402d79
-  402f64:	00405fe4 	.word	0x00405fe4
-  402f68:	00406008 	.word	0x00406008
-  402f6c:	0040601c 	.word	0x0040601c
-  402f70:	004029dd 	.word	0x004029dd
-  402f74:	00406020 	.word	0x00406020
-  402f78:	00406040 	.word	0x00406040
-  402f7c:	00401c15 	.word	0x00401c15
-  402f80:	00405fbc 	.word	0x00405fbc
-  402f84:	00405f98 	.word	0x00405f98
-  402f88:	00405f74 	.word	0x00405f74
-  402f8c:	00405f4c 	.word	0x00405f4c
+  402f40:	00405f3c 	.word	0x00405f3c
+  402f44:	004012cd 	.word	0x004012cd
+  402f48:	20400c18 	.word	0x20400c18
+  402f4c:	20400c14 	.word	0x20400c14
+  402f50:	20400c1c 	.word	0x20400c1c
+  402f54:	00405fe0 	.word	0x00405fe0
+  402f58:	00401bc9 	.word	0x00401bc9
+  402f5c:	00402d69 	.word	0x00402d69
+  402f60:	00405fe4 	.word	0x00405fe4
+  402f64:	00406008 	.word	0x00406008
+  402f68:	0040601c 	.word	0x0040601c
+  402f6c:	004029dd 	.word	0x004029dd
+  402f70:	00406020 	.word	0x00406020
+  402f74:	00406040 	.word	0x00406040
+  402f78:	00401c15 	.word	0x00401c15
+  402f7c:	00405fbc 	.word	0x00405fbc
+  402f80:	00405f98 	.word	0x00405f98
+  402f84:	00405f74 	.word	0x00405f74
+  402f88:	00405f4c 	.word	0x00405f4c
+  402f8c:	20400c10 	.word	0x20400c10
 
 00402f90 <__libc_init_array>:
   402f90:	b570      	push	{r4, r5, r6, lr}
