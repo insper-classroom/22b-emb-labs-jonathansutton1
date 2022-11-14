@@ -84,6 +84,11 @@ extern void vApplicationMallocFailedHook(void) {
 /************************************************************************/
 volatile char but1_flag = 0;
 volatile char flag_rtc_alarm = 0;
+volatile char time_flag = 0;
+
+volatile int hour;
+volatile int min;
+volatile int seg;
 
 void but1_callback (void) {
 	printf("Callback ativado!!\n");
@@ -242,8 +247,50 @@ void pisca_led (int n, int t) {
 	}
 }
 
-//*****************************************//
+//**********CODIGO PARA O CRONOMETRO*************//
 
+void TC0_Handler(void) {
+	volatile uint32_t status = tc_get_status(TC0, 0);
+	time_flag = 1;  
+}
+
+void time(){
+	seg++;
+	
+	if(seg == 60){
+		min++;
+		seg = 0;
+		gfx_mono_draw_string(" ", 90,0, &sysfont);
+	}
+	
+	if(min == 60){
+		hour++;
+		min = 0;
+		gfx_mono_draw_string(" ", 60,0, &sysfont);
+	}
+	
+	if(hour == 24){
+		hour = 0;
+		gfx_mono_draw_string(" ", 30,0, &sysfont);
+	}
+	
+	char hora_str[5];
+	sprintf(hora_str, "%02d", hour);
+	
+	char minuto_str[5];
+	sprintf(minuto_str, "%02d", min);
+	
+	char segundo_str[5];
+	sprintf(segundo_str, "%02d", seg);
+
+	gfx_mono_draw_string(hora_str, 20,0, &sysfont);
+	gfx_mono_draw_string(":", 40,0, &sysfont);
+	gfx_mono_draw_string(minuto_str, 50,0, &sysfont);
+	gfx_mono_draw_string(":", 70,0, &sysfont);
+	gfx_mono_draw_string(segundo_str, 80,0, &sysfont);
+}
+
+//*****************************************//
 
 void io_init(void){
 	pmc_enable_periph_clk(LED_PIO_ID);
@@ -299,6 +346,10 @@ int main(void) {
 	TC_init(TC0, ID_TC1, 1, 4);
 	tc_start(TC0, 1);
 	
+	//CRONOMETRO
+	TC_init(TC0, ID_TC0, 0, 1);
+	tc_start(TC0, 0);
+	
 	//LED2
 	RTT_init(4, 16, RTT_MR_ALMIEN);
 	
@@ -327,7 +378,11 @@ int main(void) {
 			printf("Piscou :) \n");
 			flag_rtc_alarm = 0;
 		}
-				pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
-
+		if(time_flag){
+			time();
+			time_flag = 0;
+		}
+				
+		pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
 	}
 }
