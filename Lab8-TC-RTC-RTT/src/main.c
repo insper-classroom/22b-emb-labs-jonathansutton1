@@ -31,16 +31,6 @@
 #define BUT1_PIO_IDX      28
 #define BUT1_PIO_IDX_MASK (1u << BUT1_PIO_IDX) 
 
-#define BUT2_PIO          PIOC
-#define BUT2_PIO_ID       ID_PIOC
-#define BUT2_PIO_IDX      31
-#define BUT2_PIO_IDX_MASK (1u << BUT2_PIO_IDX)
-
-#define BUT3_PIO          PIOA
-#define BUT3_PIO_ID       ID_PIOA
-#define BUT3_PIO_IDX      19
-#define BUT3_PIO_IDX_MASK (1u << BUT3_PIO_IDX)
-
 
 /** RTOS  */
 #define TASK_OLED_STACK_SIZE                (1024*6/sizeof(portSTACK_TYPE))
@@ -65,7 +55,7 @@ typedef struct  {
 
 /** prototypes */
 void but1_callback(void);
-static void io_init(void);
+void io_init(void);
 void pisca_led(int n, int t);
 void pin_toggle(Pio *pio, uint32_t mask);
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq);
@@ -92,9 +82,11 @@ extern void vApplicationMallocFailedHook(void) {
 /************************************************************************/
 /* handlers / callbacks                                                 */
 /************************************************************************/
-volatile char but1_flag;
+volatile char but1_flag = 0;
+volatile char flag_rtc_alarm = 0;
 
 void but1_callback (void) {
+	printf("Callback ativado!!\n");
 	but1_flag = 1;
 }
 
@@ -138,9 +130,9 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
 }
 
-void TC3_Handler(void) {
-	volatile uint32_t status = tc_get_status(TC1, 0);
-	pin_toggle(LED_PIO, LED_PIO_IDX_MASK);
+void TC2_Handler(void) {
+	volatile uint32_t status = tc_get_status(TC0, 2);
+	pin_toggle(LED_PIO, LED_PIO_IDX_MASK);  
 }
 //**********CODIGO PARA O LED1*************//
 
@@ -222,12 +214,14 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type) {
 	rtc_enable_interrupt(rtc,  irq_type);
 }
 
-volatile char flag_rtc_alarm = 0;
-
 void RTC_Handler(void) {
 	uint32_t ul_status = rtc_get_status(RTC);
-		
+	
+	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
+	}
+	
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
+		printf("Init do RTC \n");
 		flag_rtc_alarm = 1;
 	}
 
@@ -271,7 +265,7 @@ void io_init(void){
 	pmc_enable_periph_clk(BUT1_PIO_ID);
 	pio_configure(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
 	pio_set_debounce_filter(BUT1_PIO, BUT1_PIO_IDX_MASK, 60);
-	pio_handler_set(BUT1_PIO,	BUT1_PIO_ID,	BUT1_PIO_IDX_MASK,	PIO_IT_FALL_EDGE,	but1_callback);
+	pio_handler_set(BUT1_PIO,	BUT1_PIO_ID,	BUT1_PIO_IDX_MASK,	PIO_IT_EDGE,	but1_callback);
 	pio_enable_interrupt(BUT1_PIO, BUT1_PIO_IDX_MASK);
 	pio_get_interrupt_status(BUT1_PIO);
 	NVIC_EnableIRQ(BUT1_PIO_ID);
@@ -288,6 +282,8 @@ int main(void) {
 	board_init();
 	io_init();
 	gfx_mono_ssd1306_init();
+	delay_init();
+
 
 	/* Initialize the console uart */
 	configure_console();
@@ -296,8 +292,8 @@ int main(void) {
 	WDT->WDT_MR = WDT_MR_WDDIS;
 	
 	//LED0
-	TC_init(TC1, ID_TC3, 0, 5);
-	tc_start(TC1, 0);
+	TC_init(TC0, ID_TC2, 2, 5);
+	tc_start(TC0, 2);
 	
 	//LED1
 	TC_init(TC0, ID_TC1, 1, 4);
@@ -310,16 +306,28 @@ int main(void) {
 	calendar rtc_initial = {2018, 3, 19, 12, 15, 45 ,1};
 	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN);
 	
-	/* Leitura do valor atual do RTC */
-	uint32_t current_hour, current_min, current_sec;
-	uint32_t current_year, current_month, current_day, current_week;
-	rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
-	rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
-	
-	/* configura alarme do RTC para daqui 20 segundos */
-	rtc_set_date_alarm(RTC, 1, current_month, 1, current_day);
-	rtc_set_time_alarm(RTC, 1, current_hour, 1, current_min, 1, current_sec + 20);
-
 	while(1) {
+		if(but1_flag){
+			uint32_t current_hour, current_min, current_sec;
+			uint32_t current_year, current_month, current_day, current_week;
+			rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
+			rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
+			rtc_set_date_alarm(RTC, 1, current_month, 1, current_day);
+			
+			if(current_sec<40){
+				rtc_set_time_alarm(RTC, 1, current_hour, 1, current_min, 1, current_sec+20);
+			}
+			else{
+				rtc_set_time_alarm(RTC, 1, current_hour, 1, current_min+1, 1, current_sec - 40);
+			}
+			but1_flag = 0;
+		}
+		if(flag_rtc_alarm){
+			pisca_led(3, 200);
+			printf("Piscou :) \n");
+			flag_rtc_alarm = 0;
+		}
+				pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
+
 	}
 }
